@@ -1,0 +1,113 @@
+<section class="container-bg">
+	<!-- <section class="container-bg customHeight"> -->
+	<div class="container ps-relative">
+		
+			<ul class="dashboard-tabs">
+				<li><a [routerLink]="['/frontend/coach/dashboard']" class="active"><i class="home-icon active"></i><span>My Teams</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/roster']" ><i class="roster-icon"></i><span>Roster</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/statistics']" ><i class="stats-icon"></i><span>Statistics</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/assignments']" ><i class="assign-icon"></i><span>Assignments</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/feedback']" ><i class="feed-icon"></i><span>Feedback</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/messages']" ><i class="msg-icon"></i><span>My Messages</span></a></li>
+			</ul>
+			<div class="dashboard-container	">
+			<!-- Team Listing -->
+			<div class="dashboard-block dashboardgap" *ngIf="divToDisplay==1">
+				<div class="dashboard-head">
+					<h2 class="h2-dash">My Teams</h2>
+					<button class="btn-blue btn-desktop" (click)="divToDisplay=2;team={team_name:'',team_logo:'',age_of_team:'',user_id:user_id};form_title='Add';"><i class="plus-icon"></i>Create New Team</button>
+				</div>
+				<table class="table-dash table-team" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th>Team</th>
+							<th>Age of Team</th>
+							
+							<th>Owner</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let t of teams">
+							<td>
+								<span class="profile-tb-block">
+									<figure class="profile-img">											
+										<a data-lightbox="lightbox"  *ngIf="t.team_logo!=''" href="{{image_path}}{{t.team_logo}}"  data-title=""><img src="{{image_path}}{{t.team_logo}}" width="100" /></a>
+									</figure>
+									<a href="javascript:void(0)"  href="/#/frontend/coach/roster/{{t.id}}"  class="profile-link">{{t.team_name}}</a>
+								</span>
+							</td>
+							<td>
+								<span>{{age_groups_array[t.age_of_team]}}</span>
+							</td>
+							
+							<td>
+								<span>{{username}}</span>
+							</td>
+							<td>
+								<span class="action-block">
+									<a href="javascript:void(0)"  (click)="divToDisplay=2;team=t;form_title='Update';image_path=url+'containers/coaches/download/';" class="edit-tb-btn">Edit</a>
+									<a href="javascript:void(0)" class="delete-tb-btn" (click)="delete(t.id)">Delete</a>
+								</span>
+							</td>
+						</tr>							
+					</tbody>
+				</table>
+				<button class="btn-blue btn-bottom-mobile" (click)="divToDisplay=2;team={team_name:'',team_logo:'',age_of_team:'',user_id:user_id};form_title='Add';"><i class="plus-icon"></i>Create New Team</button>
+			</div>
+			<!-- Team Listing -->
+			<!-- Add Team -->
+			<div class="dashboard-block edit-team-col" *ngIf="divToDisplay==2">
+				<form (ngSubmit)="addOrUpdateTeam()"  #form="ngForm"  autocomplete="off">
+					<div class="cf align-center-mob">
+						<div class="upload-img field-col">
+						
+							<label>Team Logo</label>
+							<figure>
+								<img [src]="image_path+team.team_logo" *ngIf="team.team_logo!=''" width="100">
+							</figure>
+							<div ng2FileDrop  [uploader]="team_logo_uploader" ></div>
+	  						
+	  						<div class="fileUploadbtn" >
+	          					<label>
+	          						<button type="button" class="btn">{{form_title}} Logo</button>
+	          						<input type="file" class="fl-btn" ng2FileSelect [uploader]="team_logo_uploader"  [(ngModel)]="team.team_logo"  (change)="readCoachTeamLogoUrl($event)" (click)="refreshFileList()"  accept="image/*"   name="team_logo"/>
+	          					</label>
+	          				</div>
+							
+						</div>
+
+						
+						<div class="field-col">								
+							<label>Team Name</label>
+							<input type="text" maxlength="50" class="frm-control" placeholder="Team Name"  [(ngModel)]="team.team_name"  required=""  name="team_name" >			
+						</div>
+						
+						<div class="field-col">
+							<label>Age Of Team</label>
+							<div class="pointer">
+								<span></span>
+								<select class="frm-control" name="age_of_team" [(ngModel)]="team.age_of_team" required=""  >
+									 <option *ngFor="let age_group of age_groups" value= {{age_group.id}}>
+						              <span >{{age_group.val}}</span>
+						                
+						            </option>
+								</select>
+							</div>
+						</div>
+					</div>
+					
+					<div class="field-col-full">
+						<button type="submit" [disabled]="!form.valid" class="blueFull-btn updategap">{{form_title}} Team</button>	
+						<button type="button" class="blueFull-btn" (click)="divToDisplay=1;image_path=url+'containers/coaches/download/';getTeams();">Cancel</button>	
+					</div>
+					
+					
+				</form>
+			</div>
+
+
+		</div>
+		<app-right-ads></app-right-ads>
+	</div>	
+</section>

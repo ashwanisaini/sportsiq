@@ -1,0 +1,81 @@
+<section class="container-bg">
+	<div class="container ps-relative">
+		
+			<ul class="dashboard-tabs">
+				<li><a [routerLink]="['/frontend/player/dashboard']" ><i class="home-icon"></i><span>My Teams</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/statistics']" ><i class="stats-icon"></i><span>Statistics</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/assignments']"><i class="assign-icon"></i><span>Assignments</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/feedback']"  class="active"><i class="feed-icon active"></i><span>Feedback</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/messages']" ><i class="msg-icon"></i><span>My Messages</span></a></li>
+				<li><a href="javascript:void(0)"><i class="book-icon"></i><span>Education Module</span></a></li>
+			</ul>
+			<div class="dashboard-container	">
+			<div class="dashboard-block  dashboard-gap">
+				<div class="dashboard-head">
+					<h2 class="h2-dash">Feedback</h2>
+
+					<div class="dropdown-button">
+						<div class="wrapper-dropdown-2" id="drop1" tabindex="1">{{team_drop_down_text}}
+							<ul class="dropdown">
+								<li *ngFor="let team of teams">
+									<a href="javascript:void(0);" (click)="selectTeam(team.id,team.team_name)">{{team.team_name}}</a>
+								</li>								
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="dashboard-stats-block stats-border">					
+					<div class="stats-question-block">
+						<table class="table-dash table-feedback" cellpadding="0" cellspacing="0" *ngIf="feedbacks.length>0">
+							<thead>
+								<tr>
+									<th>Date (dd-mm-yyyy)</th>
+									<th>Time (hh:ss)</th>
+									<th>Feedback</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let feedback of feedbacks">
+									<td>
+										<span>
+											{{feedback.date}}
+										</span>
+									</td>
+									<td>
+										<span>
+											{{feedback.time}}
+										</span>
+									</td>
+									<td>
+										<span class="txt-black-mm">
+											<a href="javascript:void(0)" class="feedback-link" *ngIf="!feedback.show" (click)="showIndividualFeedback(feedback,1)">+ VIEW FEEDBACK</a>
+
+											<a href="javascript:void(0)" class="feedback-link" *ngIf="feedback.show" (click)="showIndividualFeedback(feedback,0)">- VIEW FEEDBACK</a>
+											<span class="feedback-text" *ngIf="feedback.show">
+											{{feedback.feedback}}
+											</span>
+										</span>
+									</td>
+								</tr>						
+							</tbody>
+						</table>
+						<table *ngIf="!feedbacks.length">
+							<tr>
+								<td>
+									<h6>
+										No feedback has been given by the selected team.
+									</h6>
+								</td>
+							</tr>							
+						</table>						
+					</div>					
+				</div>
+			</div>	
+		</div>
+
+		<app-right-ads></app-right-ads>
+
+	</div>
+</section>

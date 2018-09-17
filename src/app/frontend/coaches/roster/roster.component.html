@@ -1,0 +1,181 @@
+<section class="container-bg">
+	<div class="container ps-relative">
+		
+			<ul class="dashboard-tabs">
+				<li><a [routerLink]="['/frontend/coach/dashboard']"><i class="home-icon"></i><span>My Teams</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/roster']" class="active"><i class="roster-icon active"></i><span>Roster</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/statistics']" ><i class="stats-icon"></i><span>Statistics</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/assignments']" ><i class="assign-icon"></i><span>Assignments</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/feedback']" ><i class="feed-icon"></i><span>Feedback</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/messages']" ><i class="msg-icon"></i><span>My Messages</span></a></li>
+			</ul>
+			<div class="dashboard-container	">
+			<div class="dashboard-block roaster">
+				<div class="dashboard-head">
+					<h2 class="h2-dash">Roster</h2>
+					
+					<div class="dropdown-button">
+						<div class="wrapper-dropdown-2" id="drop1" tabindex="1">{{team_drop_down_text}}
+							<ul class="dropdown">
+								<li *ngFor="let team of teams">
+									<a href="javascript:void(0);" (click)="selectTeam(team.id,team.team_name)">{{team.team_name}}</a>
+								</li>								
+							</ul>
+						</div>
+					</div>
+					<button class="btn-blue btn-desktop" (click)="addNewPlayer(team_id)">Add New Player</button>
+				</div>
+
+				<table class="table-dash table-roster roaster-tab" cellpadding="0" cellspacing="0" *ngIf="players.length>0">
+					<thead>
+						<tr>
+							<th>Photo</th>
+							<th>Name</th>
+							<th>Contact Info</th>
+							<th>Status</th>
+							<th>Actions</th>
+							<th>Education Module</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let player of players">
+							<td>
+								<span>
+									<figure class="profile-img">
+										<img src="{{player.logo}}" *ngIf="player.logo!=''" />
+									</figure>
+								</span>
+							</td>
+							<td>
+								<span>
+									<a href="#" class="profile-link">{{player.first_name}} {{player.last_name}}</a>
+								</span>
+							</td>
+							<td>
+								<span class="txt-black-mm">
+									{{player.email}}
+									<br/>
+									{{player.phone_number}}
+								</span>
+							</td>
+							<td>
+								<span class="txt-grey-sm" *ngIf="player.has_joined==0 && player.is_active==1">
+									Invitation Sent
+									<br/>
+									<a href="javascript:void(0)" (click)="showPopup('resend_invite',player.first_name+' '+player.last_name,player.email,player.invite_first_name+' '+player.invite_last_name)" class="invite-link">Resend Invite</a>
+								</span>
+								<span class="txt-grey-sm" *ngIf="player.has_joined==1 && player.is_active==1">
+									User Joined
+								</span>
+								<span class="txt-grey-sm"  *ngIf="player.has_joined==2 && player.is_active==1">
+									Declined to Join
+									<br/>
+									<a  href="javascript:void(0)" (click)="showPopup('resend_invite',player.first_name+' '+player.last_name,player.email,player.invite_first_name+' '+player.invite_last_name)" class="invite-link">Resend Invite</a>
+								</span>
+								<span class="txt-grey-sm" *ngIf="player.is_active==0">
+									User Deleted
+								</span>
+								<span class="txt-grey-sm" *ngIf="player.is_active==null">
+									User Not Registered
+								</span>
+							</td>
+							<td>
+								<span *ngIf="player.is_active==0">
+									<a href="javascript:void(0)" (click)="showPopup('restore',player.first_name+' '+player.last_name,player.id)">Restore</a>
+								</span>
+								<span  *ngIf="player.is_active==1">
+									<a href="javascript:void(0)" (click)="showPopup('delete',player.first_name+' '+player.last_name,player.id)"><i class="delete-icon"></i></a>
+								</span>
+								
+							</td>
+							<td>
+								<span>
+									<label class="switch">
+									  <input type="checkbox" checked>
+									  <span class="slider round"></span>
+									</label>
+								</span>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				<h3 *ngIf="!team_id">Please select a team from drop down.</h3>
+				<h3 *ngIf="players.length==0 && team_id!='' && team_id!=undefined">No player found for this team</h3>
+				<button class="btn-blue btn-bottom-mobile">Add New Player</button>
+			</div>			
+		</div>
+		<app-right-ads></app-right-ads>
+	</div>
+</section>
+
+
+<div class="modal-wrap-pop" *ngIf="show_modal_popup==1"></div>
+<!-- DELETE Player -->
+<div class="pop-box autoheight popup" *ngIf="show_popup=='delete'">
+	<div class="loginHead cf">
+		<div class="col-3">
+			<img src="assets/images/logo_small.png" alt="Logo">
+		</div>
+		<div class="col-3 hide640">
+			<h1 class="text-center">DELETE PLAYER</h1>
+		</div>
+		<div class="col-3">
+			<img src="assets/images/close.png" alt="close" class="close fr" (click)="closePopup();">
+		</div>
+	</div>
+	<div class="modalList scrollList">
+		<h3>Do you really want to delete the player {{action_player}} ?</h3>
+		<div class="block-col duel-btn">
+			<button type="submit" class="blueFull-btn" (click)="closePopup();">NO</button>
+			<button type="submit" class="blueFull-btn grybtn" (click)="deletePlayer()">YES</button>
+		</div>
+	</div>
+</div>
+<!-- /DELETE Player -->
+
+<!-- RESTORE Player -->
+<div class="pop-box autoheight popup" *ngIf="show_popup=='restore'">
+	<div class="loginHead cf">
+		<div class="col-3">
+			<img src="assets/images/logo_small.png" alt="Logo">
+		</div>
+		<div class="col-3 hide640">
+			<h1 class="text-center">RESTORE PLAYER</h1>
+		</div>
+		<div class="col-3">
+			<img src="assets/images/close.png" alt="close" class="close fr" (click)="closePopup();">
+		</div>
+	</div>
+	<div class="modalList scrollList">
+		<h3>Do you really want to restore the player {{action_player}} ?</h3>
+		<div class="block-col duel-btn">
+			<button type="submit" class="blueFull-btn" (click)="closePopup();">NO</button>
+			<button type="submit" class="blueFull-btn grybtn" (click)="restorePlayer()">YES</button>
+		</div>
+	</div>
+</div>
+<!-- /RESTORE Player -->
+
+<!-- RESEND INVITE -->
+<div class="pop-box autoheight popup"  *ngIf="show_popup=='resend_invite'">
+	<div class="loginHead cf">
+		<div class="col-3">
+			<img src="assets/images/logo_small.png" alt="Logo">
+		</div>
+		<div class="col-3 hide640">
+			<h1 class="text-center"> RESEND INVITE </h1>
+		</div>
+		<div class="col-3">
+			<img src="assets/images/close.png" alt="close" class="close fr"  (click)="closePopup();">
+		</div>
+	</div>
+	<div class="modalList scrollList">
+		<h3>Do you want to resend invite to {{action_player}} ?</h3>
+		<div class="block-col duel-btn">
+			<button type="submit" class="blueFull-btn" (click)="closePopup();">NO</button>
+			<button type="submit" class="blueFull-btn grybtn" (click)="resendInvite()">YES</button>
+		</div>
+	</div>
+</div>
+<!--/ RESEND INVITE -->

@@ -1,0 +1,8 @@
+<div class="loginmodal-container">
+  <img src="../../assets/images/main_logo.png" />
+  <form (ngSubmit)="login()"  #form="ngForm"  autocomplete="off">
+  <input class="form-control"  name="email" [(ngModel)]="user.email" id="input-email" pattern=".+@.+..+" required="" placeholder="Email address">
+     <input name="password" type="password" [(ngModel)]="user.password" id="input-password" class="form-control" required=""  placeholder="Password">
+  <button [disabled]="!form.valid" class="btn btn-lg btn-primary btn-block" type="submit" id="login">Sign In</button>
+  </form>  
+</div>

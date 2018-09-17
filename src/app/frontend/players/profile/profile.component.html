@@ -1,0 +1,217 @@
+<div class="formWrap cf">
+	<h4><strong>Edit Profile</strong></h4>
+	<form (ngSubmit)="fileUploadProfilePic()" #form="ngForm" autocomplete="nope">
+		<div class="frm-col">
+			
+			<div class="formSection">
+				<div class="upload-img cf">						
+					<figure>
+						<img [src]="player_logo" *ngIf="player_logo!='' && player_logo!=null" width="100">
+					</figure>
+					<div ng2FileDrop  [uploader]="profile_pic_uploader" (click)="refreshFileList()"></div>
+					<div class="fileUploadbtn">
+	          			<label>
+	          				<button type="button" class="btn">Add Photo</button>
+	          				<input type="file"  (change)="readProfilePicUrl($event)" ng2FileSelect [uploader]="profile_pic_uploader"  [(ngModel)]="player_logo" accept="image/*"  name="player_logo" class="fl-btn"/>
+	          			</label>
+	          		</div>  					
+				</div>
+				<div class="cf">
+					<div class="col-2">
+						<div class="field-col">
+							<label>First Name</label>
+							<input type="text" [(ngModel)]="first_name" name="first_name" required="" class="frm-control" placeholder="Player First Name">
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="field-col">
+							<label>Last Name</label>
+							<input type="text" class="frm-control"  [(ngModel)]="last_name"  required="" name="last_name"  placeholder="Player Last Name">
+						</div>
+					</div>
+				</div>
+				<div class="cf">
+					<div class="col-2">
+						<div class="field-col cf">
+							<label>Gender</label>
+							 <div class="radio">
+								<label>
+									<input name="o1" value="2" type="radio"  (click)="selectGender(2)" [checked]="gender==2" />
+									<span class="cr"><i class="cr-icon round-active"></i></span>
+									Male
+								</label>
+			                </div>
+			                <div class="radio">
+								<label>
+									<input name="o1" value="1" type="radio"  [checked]="gender==1" (click)="selectGender(1)">
+									<span class="cr"><i class="cr-icon round-active"></i></span>
+									Female
+								</label>
+			                </div>
+
+			               
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="field-col">
+							<label>Birth Day</label>
+							<!--<input type="date" [(ngModel)]="age"  name="age"  class="frm-control" required="" placeholder="Age" (keyup)="showParents()">-->
+							<input class="form-control" placeholder="yyyy-mm-dd"
+	 							name="dp" [(ngModel)]="player_age" ngbDatepicker #d="ngbDatepicker"  class="frm-control"  required=""  (click)="d.toggle()" [minDate]="minDate" [maxDate]="maxDate" (ngModelChange)="onDateChange($event)" >
+						</div>
+					</div>
+				</div>
+				<hr class="line">
+				<div class="cf">
+					<div class="col-2">
+						<div class="field-col">
+							<label>Coach Name</label>
+							<input type="text"  [(ngModel)]="coach_name" class="frm-control" placeholder="Name"  name="coach_name" >
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="field-col">
+							<label>Sport</label>
+							<div class="pointer">
+								<span></span>
+								<select class="frm-control" required=""   name="sport"  [(ngModel)]="sport" >
+									 <option *ngFor="let sport of sports" value= {{sport.id}}>
+						              {{sport.name}}
+						            </option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="cf">
+					<div class="col-2">
+						<div class="field-col">
+							<label>Club Name</label>
+							<input type="text" [(ngModel)]="club"  name="club"  class="frm-control" placeholder="Club Name">
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="field-col">
+							<label>Team Name</label>
+							<input type="text" [(ngModel)]="team_name"  name="team_name"  class="frm-control" placeholder="Team Name">
+						</div>
+					</div>
+				</div>
+
+				<div class="cf">
+					<div class="col-2">
+						<div class="field-col">
+							<label>Address</label>
+							<input type="text" [(ngModel)]="address"  required=""  class="frm-control" placeholder="Address"  name="address" >
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="field-col">
+							<label>State</label>
+							<!--<div class="pointer">
+								<span></span>
+								<select class="frm-control"  required=""  name="state"  [(ngModel)]="state" >
+									<option *ngFor="let state of states" value= {{state}}>
+						              {{state}}
+						            </option>
+								</select>
+							</div>-->
+							<input type="text" class="frm-control" placeholder="State" name="state"  [(ngModel)]="state" >
+						</div>
+					</div>
+				</div>
+
+				<div class="cf">
+					<div class="col-2">
+						<div class="field-col">
+							<label>City</label>
+							<!--<div class="pointer">
+								<span></span>
+								<select class="frm-control" [(ngModel)]="city"  required=""  name="city" >
+									<option *ngFor="let city of cities" value= {{city}}>
+						              {{city}}
+						            </option>
+								</select>
+							</div>-->
+							<input type="text" class="frm-control" placeholder="City" name="city"  [(ngModel)]="city" >
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="field-col">
+							<label>Zip Code</label>
+							<input type="text"  name="zipcode" required=""  class="frm-control" [(ngModel)]="zipcode"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" max-length="6">
+						</div>
+					</div>
+				</div>
+
+				<div class="cf">
+					<div class="col-2">
+						<div class="field-col">
+							<label>Phone Number</label>
+							<input type="text" max-length="12" class="frm-control" required=""  [(ngModel)]="phone_number" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="phone_number" >
+						</div>
+					</div>
+				</div>
+				
+				<hr class="line">
+				
+				<div class="cf" *ngIf="show_parent==1">
+					<div class="col-2">
+						<div class="field-col">
+							<label>Parent One</label>
+							<input type="text" class="frm-control" placeholder="Name" [(ngModel)]="parent_one_name"  name="parent_one_name" >
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="field-col">
+							<label>Phone Number of Parent One</label>
+							<input type="text" class="frm-control" placeholder="Phone" [(ngModel)]="parent_one_phone"  name="parent_one_phone" >
+						</div>
+					</div>
+				</div>
+
+				<div class="cf" *ngIf="show_parent==1">
+					<div class="col-2">
+						<div class="field-col">
+							<label>Email Address of Parent One</label>
+							<input type="email" class="frm-control" placeholder="Email" [(ngModel)]="parent_one_email"  name="parent_one_email" >
+						</div>
+					</div>
+				</div>
+
+				<hr class="line" *ngIf="show_parent==1">
+				
+				<div class="cf" *ngIf="show_parent==1">
+					<div class="col-2">
+						<div class="field-col">
+							<label>Parent Two</label>
+							<input type="text" class="frm-control" placeholder="Name" [(ngModel)]="parent_two_name"  name="parent_two_name" >
+						</div>
+					</div>
+					<div class="col-2">
+						<div class="field-col">
+							<label>Phone Number of Parent Two</label>
+							<input type="text" class="frm-control" placeholder="Phone" [(ngModel)]="parent_two_phone"  name="parent_two_phone" >
+						</div>
+					</div>
+				</div>
+
+				<div class="cf" *ngIf="show_parent==1">
+					<div class="col-2">
+						<div class="field-col">
+							<label>Email Address of Parent Two</label>
+							<input type="email" class="frm-control" placeholder="Email" [(ngModel)]="parent_two_email"   name="parent_two_email" >
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+		<div class="block-col">
+			<button type="submit"   [disabled]="!form.valid || submitClicked"  class="blueFull-btn">SUBMIT</button>	
+		</div>
+	</form>
+</div>

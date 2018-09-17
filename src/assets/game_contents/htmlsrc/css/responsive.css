@@ -1,0 +1,281 @@
+/*responsive css mukul kant 1 feb 2018*/
+
+@media screen and (max-width:1350px) {
+    .gray-col,
+    .category-col,
+    .download-col,
+    .contct-method,
+    .green-col{padding-left: 15px;padding-right: 15px;}
+    .footer {padding: 10px 20px;}
+    .header-section {padding: 15px;}
+    .logo-class {width: 200px;}
+    .flex-block.btn-flex {width: 250px;}
+    .reg-btn-link, .login-btn-link {width: 90px;height: 37px;border: 2px solid #007AC2;font-size: 16px;margin-left: 20px;}
+    .socialfeed {padding: 15px;text-align: center;}
+    .socialfeed .col-3.m-lr10 {margin: 0 13px;}
+    .socialfeed .col-3 {float: none;display: inline-block;}
+    .socialfeed h3 {text-align: left;}
+    .plan-list,
+    .aboutWrap{padding: 20px 15px;}
+    .playrslider .text-col-grn.col-20p{margin-top: 10px}
+}
+@media screen and (max-width:1200px) {
+    #closeNav{display: block;}
+    ul.socialIco li img {max-width: 40px;}
+    #menu {display: block;position: fixed;bottom: 0;width: 250px;right: 0;z-index: 1;top: 0;background: #fff;right: -250px;border-left: 1px solid #ccc;}
+    #slide {display: block;}
+    .logo-class {float: left;}
+    .header-nav {display: block;margin:0 10px 10px;}
+    .header-nav li {padding: 0;}
+    .header-nav li a {padding: 5px;display: block;}
+    .header-nav li ul {position: relative;padding: 0;width: auto;margin-top: 2px;}
+    .flex-block {display: block;}
+    .reg-btn-link, .login-btn-link {margin: 10px;width: 230px;}
+    .header-nav li.moreNav, .header-nav li.moreNav:hover {background: url(../images/br_down.png) 60% 7px no-repeat;}
+    .userLog-col h5 span,
+    .userLog-col h2,
+    .header-nav li.moreNav span {display: none;}
+    .fedbck-col {padding: 20px;}
+    .header-nav li {padding: 0px 20px 0 0;}
+    .header-nav {margin-left: 10px;}
+    .reg-btn-link, .login-btn-link {margin-left: 10px;}
+    .register-col hgroup {margin: 30px 0;}
+    .register-col hgroup h3 {margin: 0 0 10px;}
+    .userNav{clear: both;width: 100%;box-shadow: none;border-radius: 0;}
+    .userNav{position:unset;display: block !important;}
+    .userLog-col{padding: 0 15px 15px;}
+    .userLog-col img{margin: 0;float: left;}
+    .userLog-col h5{float: right;margin: 12px 0 30px;}
+    .userNav li a{padding: 10px;}
+}
+@media screen and (max-width:1110px) {
+    .paymentList td,
+    .paymentList h1,
+    .paymentList h3,
+    .paymentList th{font-size: 17px;}
+    .container-1110 {margin: 0 15px;}
+    .add-btn-col .btn,
+    .field-col .frm-control {height: 40px;}
+}
+@media screen and (max-width:990px) {
+    .notiTxt{margin: 10px 0;font-size: 13px;}
+    .checkFull {margin: 10px 5px;height: 50px;}
+    .checkmark {font-size: 17px;padding: 15px 0 15px 35px;height: 50px;}
+    .checkFull .checkmark:after {background-size: 20px;background-repeat: no-repeat;left: 11px;top: 17px;}
+    .checkmark:after , .checkFull input:checked ~ .checkmark::after{background: url(../images/checked.png);background-size: 20px;background-repeat: no-repeat;left: 11px;top: 17px;}
+    .gary-col{margin: 0 5px;}
+    .scoreCard{margin-top: 15px;}
+    .bottom-nav-panal.colom-3 ul li a{width: 300px;}
+    .banner-min{height: 200px;}
+    .banner-min h1{font-size: 45px;}
+    .aboutWrap .blue-col, .aboutWrap .download-col{padding: 30px 15px;}
+    .aboutWrap h2.col-title{font-size: 25px;margin-bottom: 30px;}
+    .download-col .txt-dull h3, .txt-dull h3{font-size: 18px;margin-bottom: 18px;}
+    .txt-dull p{font-size: 15px;margin-bottom: 20px;}
+    .plan-list table{box-shadow: none;}
+    .plan-list table th,.plan-list table td{border-width: 1px;font-size: 18px;font-weight: 400;padding: 15px;}
+    .contct-method p{font-size: 16px;}
+    .plan-list table th p{font-size: 15px;margin-top: 10px}
+    .contct-method .col-3 img{width: 61px;}
+    .contct-method{padding: 15px;}
+
+}
+@media screen and (max-width:800px) {
+
+    .playrslider .text-col-grn.col-20p,
+    .col-80p{width: 100%;float: none;padding: 0;}
+    .playrslider .text-col-grn.col-20p{padding: 0 15px;}
+    .green-col .playrslider h3{font-size: 20px;margin-bottom: 10px;}
+    .green-col .playrslider p {margin-bottom: 15px;font-size: 15px;}
+    body .playrslider .owl-nav{float: none;width: 100%;text-align: center;margin-top: 0;}
+    .playrslider .col-80p img{max-width: 600px;margin: 0 auto;display: block;}
+    .mobileTitle{display: block;}
+    .formWrap.nobg-mob{background: none;box-shadow: none;}
+    .paymentList td, .paymentList h1, .paymentList h3, .paymentList th{font-size: 15px;font-weight: 400;}
+    .paymentList.table-one tbody, .paymentList.table-one{display: block;width: 100%;}
+    .paymentList.tablePaid tr, .paymentList.tablePaid th, .paymentList.tablePaid td,
+    .paymentList.table-one tr , .paymentList.table-one tr td{display: block;width: 100%;}
+    .paymentList.table-one tr{margin-bottom: 10px;background: #fff;border: 1px solid #ccc;}
+    .paymentList.table-one tr td{border-bottom: 1px solid #ccc;position: relative;padding-left: 125px}
+    .paymentList.table-one tr td:last-child{border: none;}
+    .paymentList.table-one tr td:after{content: 'USER NAME';position: absolute;left:0px;background: #0079C7;top:0px;bottom: -1px;width: 95px;border-bottom: 1px solid #2099E7;padding: 10px;font-size: 14px;color: #fff;}
+    .paymentList.table-one tr td:nth-child(2):after{content: 'USER EMAIL';}
+    .paymentList.table-one tr td:nth-child(3):after{content: 'PRICE'}
+    .paymentList.table-one.table-two tr td:nth-child(3),
+    .paymentList.table-one.table-two tr td:nth-child(3):after{border:none;}
+    .paymentList.table-one.table-two tr td:nth-child(4),
+    .paymentList.table-one.table-two tr td:nth-child(4):after{content: 'DELETE';display: none;}
+    .paymentList.table-one tr td:nth-child(4):after{content: 'DELETE';border: none;}
+    .paymentList th, .paymentList td{padding: 10px;}
+    .paymentList .hideMob{display: none !important}
+    .paymentList.table-one tr th{display: none;}
+    .paymentList td a{text-align: left;}
+    .showMobile{display: inline-block;float: right;font-weight: bold;font-size: 18px;}
+    .formWrap.noshadow.p-0.pb-10{padding: 0 !important;}   
+    .block-col.mo-m-20{margin: 20px 0 0;}
+    .paymentList.tablePaid td.aplyTxt a,
+    .paymentList.tablePaid tr{text-align: right;}
+    .coupnCode{max-width: 200px;width: 50%;}
+
+}
+@media screen and (max-width:768px) {
+    .aboutWrap ul.socialIco li img{padding: 0;max-width: 40px;}
+    .register-col .userType {padding: 15px;margin: 0 15px;}
+    .register-col .userType a {height: 40px;font-size: 18px;padding: 8px;}
+    .field-col {width: 50%;margin-bottom: 21px;}
+    .cl-mob {clear: left;}
+    .exit-col{max-width: 40px;}
+    .exit-col h3{display: none;}
+    .scoreCard{height: 50px;}
+    .scoreCard li{font-size: 15px;}
+    .scoreCard li span{font-size: 20px;margin:0 10px;}
+    .scoreCard li img{max-width: 40px;margin: 0 5px;}
+    .bottom-nav-panal.colom-3 h4{font-size: 20px;}
+    .aboutWrap .blue-col, .aboutWrap .download-col{padding: 20px 15px;}
+    .aboutWrap .download-col h2.col-title,
+    .aboutWrap h2.col-title{margin-bottom: 21px;font-size: 22px;}
+    .banner-min{height: 140px;}
+    .banner-min h1{font-size: 35px;}
+    .contct-method{display: block;}
+    .contct-method .col-3{width: 100%;margin: 10px 0;}
+    .contct-method .col-3 img{float: left;}
+
+}
+@media screen and (max-width:720px) {
+    .register-col.reg-coach .col-2 {margin: 0;}
+    .register-col .userType {padding: 15px;margin: 0 15px;}
+    .register-col .col-2 {width: auto;margin: 15px;float: none;}
+    .radio{width: auto;}
+    .bottom-nav-panal{padding: 20px 20px 10px;}
+    .bottom-nav-panal ul li a{padding: 10px 5px;height: 50px;border-width: 2px;font-size: 18px;}
+    .plan-list table th,.plan-list table td{font-size: 16px;}
+}
+@media screen and (min-width: 479px) and (max-width:768px) {
+    h2.col-title {font-size: 24px;margin-bottom: 30px;}
+    .category-col {padding-bottom: 20px;}
+    .green-col .col-2 {width: 100%;}
+    .cati-box {width: 50%;}
+    .cati-box p {max-width: 325px;}
+    .text-col-grn {padding: 0 50px;width: 100%;}
+    .green-col {padding: 30px 0;}
+    .green-col h3 {font-size: 20px;}
+    .green-col img {display: block;margin: 0 auto;width: 100%;padding: 0 15px;}
+    .gray-col {padding: 15px 12%;}
+    .gray-col h1 {font-size: 23px;}
+    .gray-col a {height: 55px;width: 270px;}
+    .download-col h3 {font-size: 20px;}
+    .blue-col, .download-col {padding: 30px 15px;}
+    .app-ico a {width: 44%;}
+    .download-col ul li {margin: 13px 0 0;padding-left: 30px;}
+    .pl-20-m {padding-left: 20px;}
+    .owl-dots {display: none;}
+    .userImg {vertical-align: top;width: 140px;padding-right: 25px;}
+    .socialfeed {padding: 30px 15px;}
+    .socialfeed .col-3.m-lr10 {margin: 0 10px;}
+    .socialfeed h3 {font-size: 16px;padding: 10px 16px;}
+    .socialfeed .col-3 {min-height: 310px;}
+}
+@media screen and (min-width: 319px) and (max-width:480px) {
+    .cati-box h3, h2.col-title {font-size: 21px;}
+    .category-col h2.col-title {font-size: 21px;border-bottom: 2px solid #ADDFFF;margin: 0 35px;padding-bottom: 10px;}
+    .category-col h2.col-title span {border: none;padding: 0;}
+    .cati-box {float: none;width: 100%;min-height: 10px;}
+    .cati-box p {max-width: 90%;}
+    .socialfeed, .gray-col {padding: 15px;}
+    .text-col-grn {padding: 0 15px;}
+    .gray-col h1 {font-size: 18px;}
+    .gray-col a {height: 45px;width: 210px;}
+    .download-col .col-2 {width: 100%;}
+    .download-col h2.col-title {margin-bottom: 30px;}
+    .download-col .col-2 img {max-width: 90%;display: block;margin: 0 auto;}
+    .userTxt, .userImg {display: block;width: 100%;}
+    .userImg img {display: block;margin: 0 auto;}
+    .socialfeed .col-3 {width: 100%;}
+    .socialfeed .col-3.m-lr10 {margin: 15px 0;}
+    .bottom-nav-panal.colom-3 h4{font-size: 18px;}
+}
+@media screen and (max-width:640px) {
+    .playrslider .col-80p img{max-width: 100%;}
+    .bottom-nav-panal{padding: 20px 0 10px;}
+    .moduleBtn{width: 300px;font-size: 16px;height: 55px;}
+    .bottom-nav-panal ul{justify-content:center;}
+    .upload-img figure {max-width: 90px;margin-right: 10px;}
+    .upload-img .btn {width: 120px;margin-top: 25px;margin-left: 8px;}
+    .container-1110.bigfrm,
+    .checkFull {margin: 10px 0;}
+    .hide640 {display: none;}
+    .loginHead .col-3 {width: 50%;}
+    .login-box {margin: auto 15px;height: 420px;}
+    .modalList{padding: 10px 25px;}
+    .modalList.scrollList{height: 360px;}
+    .loginFrm {padding: 20px;}
+    .loginFrm .field-col.cf a {font-size: 14px;padding-top: 10px;display: inline-block;}
+    .login-box .block-col .blueFull-btn {margin: 20px auto 10px;}
+    .loginFrm .field-col.cf a, .field-col.cf .col-2 {width: 100%;float: none;}
+    .formWrap h4 {padding-left: 0;}
+    .field-col {width: 100%;float: none;padding: 0;}
+    .field-col.cl-mob .btn {margin: 0 auto;display: block;}
+    .block-col .blueFull-btn {font-size: 18px;width: 170px;height: 45px;margin: 0 auto;}
+    .register-col hgroup h3 {font-size: 21px;}
+    .register-col hgroup h4 {font-size: 18px;}
+    .logo-class, .logo-class img {max-width: 140px;}
+    .logo-class img {margin: 10px 0 0;}
+    .bigfrm .field-col{width: 100%;}
+    .socialfeed .col-3 {margin: 0;width: 100%;}
+    .socialfeed .col-3.m-lr10 {margin: 15px 0;}
+    .footer .col-3 {display: block;text-align: center;}
+    .footer ul {text-align: center;}
+    .footer ul li {display: inline-block;margin: 0;}
+    .footer ul li a {padding: 5px;display: block;}
+    .socialIco {float: none;}
+    .footer .socialIco li a {padding: 0;}
+    .footer .col-3 p {margin: 20px 0;}
+    .exit-col{max-width: 30px;}
+    .exit-col h3{display: none;}
+    .exit-col img{max-width: 30px;margin-top: 5px}
+
+    .plan-list tr th{display: none;}
+    .plan-list tr{margin-bottom: 10px;display: block;border-bottom: 1px solid #B2D7EE;}
+    .plan-list tr td{display: block;border-bottom: none;padding: 8px 10px;position:relative;padding-left: 190px;}
+    .plan-list tr td:after{content:'';background: #0079C7;position: absolute;width: 165px;z-index: 1;left: -1px;top:-1px;bottom:1px;padding: 8px;color: #fff;font-size: 14px;}
+    .plan-list tr td:nth-child(1):after{content: 'FEATURE'}
+    .plan-list tr td:nth-child(2):after{content: 'BASIC - $30 (for 1 Month)'}
+    .plan-list tr td:nth-child(3):after{content: 'SILVER - $200 (for 1 Year)'}
+    .plan-list tr td:nth-child(4):after{content: 'GOLD - $700 (for 5 Year)'}
+    .plan-list table td.ttl-txt,
+    .plan-list tr td{color: #0079C7;font-size: 15px;}
+    .banner-col.minbanner{height: 330px;}
+    .vidoBox{width: auto;max-width: 500px;margin-top: 30px;bottom: auto;border-width: 5px;}
+}
+@media screen and (max-width:480px) {
+    .register-col .userType a{min-height: 40px;height: auto;}
+    .app-ico a{width: 50%;margin: 0;}
+    .block-col .blueFull-btn {height: 40px;border-radius: 4px;}
+    .add-btn-col .frm-control{margin: 0;}
+    .add-btn-col .btn{width: 30%;text-align: center;margin: 10px auto 0;display: block;}    
+    .add-btn-col{display: block;width: 100%;}
+    .block-col .blueFull-btn, .field-col.cl-mob .btn {width: 100%;}
+    .green-col {padding: 20px 0;}
+    .download-col {padding: 20px;}
+    .green-col .col-2 {float: none;width: 100%;}
+    .green-col h2.col-title {margin-bottom: 15px;}
+    .download-col h3, .green-col h3 {font-size: 18px;margin-bottom: 10px;}
+    .category-col {padding-bottom: 20px;}
+    .category-col h2.col-title {margin: 0 20px;}
+    .gray-col a {margin-left: 5px;width: 160px;font-size: 16px;}
+    .green-col {padding: 20px 15px;}
+    .text-col-grn {padding: 0;}
+    .socialfeed h3 {padding: 10px;font-size: 15px;}
+    .scoreCard{display: block;height: auto;}
+    .scoreCard li{display: block;width: 100% !important;margin: 0 !important;border:none;border-bottom: 1px solid #454647;padding: 8px;}
+    .scoreCard li:last-child{border:none;}
+    .scoreCard li span{font-size: 17px;}
+    .scoreCard li img{display: none;}
+    .loginHead h1{text-align: left !important;font-size: 18px;}
+    .banner-min{height: 120px;}
+    .banner-min h1{font-size: 25px;background-size: 120px;}
+}
+@media screen and (max-width:390px) {
+    .checkmark{font-size: 13px;
+    }
+}

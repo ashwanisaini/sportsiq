@@ -1,0 +1,86 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "SportsIQWeb"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico",
+        "favicon.png",
+        {
+          "glob": "**/*",
+          "input": "../node_modules/leaflet/dist/images",
+          "output": "./assets/img/markers"
+        }
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "styles": [
+        "assets/css/owl.carousel.min.css",
+        
+        "assets/css/style.css",
+        "assets/css/responsive.css",
+        "assets/css/custom.css",
+        "assets/css/dashboard.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css",
+        "../node_modules/primeng/resources/primeng.min.css"      
+      ],
+      "scripts": [
+        "assets/js/jquery.min.js",
+        "assets/js/owl.carousel.js",
+        "assets/js/script.js",
+        "assets/js/checkout.js",
+        "../node_modules/pace-js/pace.min.js",
+        "../node_modules/tinymce/tinymce.min.js",
+        "../node_modules/tinymce/themes/modern/theme.min.js",
+        "../node_modules/tinymce/plugins/link/plugin.min.js",
+        "../node_modules/tinymce/plugins/paste/plugin.min.js",
+        "../node_modules/tinymce/plugins/table/plugin.min.js",
+        "./assets/vendors/echarts.min.js",
+        "./assets/vendors/echarts.world.min.js",
+        "../node_modules/chart.js/dist/Chart.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "component": {},
+    "serve": {
+      "port": 4000
+    }
+  }
+}

@@ -1,0 +1,724 @@
+<!-- register by -->
+<div class="register-col" *ngIf="step==1">
+	<div class="container-880">		
+			<!--<div class="hgroup"><h3>Register</h3>
+			<h4>Define your role with the team</h4>		</div>-->
+		<div class="cf">
+			<div class="col-2">
+				<div class="userType m-r30">
+					<img src="assets/images/coach.png" alt="coach">
+					<a (click)="registerAs(2)" href="javascript:void(0)" class="diagonal-btn">Register as coach & team</a>
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="userType m-l30">
+					<img src="assets/images/player.png" alt="player">
+					<a  (click)="registerAs(3)"  href="javascript:void(0)" class="diagonal-btn">Register as individual player</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- register by -->
+
+<!-- Coach Register -->
+	<div class="register-col reg-coach" *ngIf="step==2">
+		<div class="container-1110">
+			
+			<div class="hgroup">
+				<h3>REGISTER AS COACH &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" (click)="goToStartPage()">Cancel</a></h3>
+			</div>			
+			<div class="formWrap cf">
+				<h4><strong>Enter the details below</strong></h4>
+				<form (ngSubmit)="registerCoach()" #form="ngForm" autocomplete="nope">
+					<div class="frm-col">
+					<div class="upload-img cf">
+						
+						<figure>
+							<img [src]="coach_image_url" *ngIf="coach_image_url!=''" width="100">
+						</figure>
+						<div ng2FileDrop  [uploader]="coach_logo_uploader" (click)="refreshFileList()"></div>
+						<div class="fileUploadbtn">
+		          			<label>
+		          				<button type="button" class="btn">Add Photo</button>
+		          				<input type="file"  (change)="readCoachLogoUrl($event)" ng2FileSelect [uploader]="coach_logo_uploader"  [(ngModel)]="coach_logo" accept="image/*"  name="coach_logo" class="fl-btn"/>
+		          			</label>
+		          		</div>
+		          				
+          				
+					
+					</div>
+					<div class="formSection">
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>First Name</label>
+									<input type="text" [(ngModel)]="coach_first_name" name="coach_first_name"   required="" required="" placeholder="Enter First Name" class="frm-control"/>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Last Name</label>
+									<input type="text" [(ngModel)]="coach_last_name" name="coach_last_name"   required="" required="" placeholder="Enter Last Name" class="frm-control"/>
+								</div>
+							</div>
+							
+						</div>
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col cf">
+									<label>Gender</label>
+									 <div class="radio">
+										<label>
+											<input name="o1" value="" type="radio" (click)="selectGender(2)">
+											<span class="cr"><i class="cr-icon round-active"></i></span>
+											Male
+										</label>
+					                </div>
+					                <div class="radio">
+										<label>
+											<input name="o1" value="" type="radio" (click)="selectGender(1)">
+											<span class="cr"><i class="cr-icon round-active"></i></span>
+											Female
+										</label>
+					                </div>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Game Competition</label>
+									<div class="pointer">
+										<span></span>
+										<select class="frm-control" name="coach_level" [(ngModel)]="coach_level"  required="" >
+											<option *ngFor="let level of levels" value={{level.id}}>
+								              {{level.name}}
+								            </option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr class="line">
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Sport</label>
+									<div class="pointer">
+										<span></span>
+										<select class="frm-control" name="coach_sport" [(ngModel)]="coach_sport"  required="" >
+											 <option *ngFor="let sport of sports" value= {{sport.id}}>
+								              {{sport.name}}
+								            </option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Club</label>
+									<input type="text" class="frm-control" placeholder="Club Name"  [(ngModel)]="coach_club" name="coach_club" required="" >
+								</div>
+							</div>
+						</div>
+
+						<div class="upload-img cf">
+							<div class="field-col p-0">
+								<label>Team Logo</label>
+								<figure>
+									<img [src]="coach_team_image_url" *ngIf="coach_team_image_url!=''" width="100">
+								</figure>
+								<div ng2FileDrop  [uploader]="coach_team_uploader"></div>
+          						
+          						<div class="fileUploadbtn">
+		          					<label>
+		          						<button type="button" class="btn">Add Photo</button>
+		          						<input type="file" class="fl-btn" ng2FileSelect [uploader]="coach_team_uploader"  [(ngModel)]="coach_team_logo"  (change)="readCoachTeamLogoUrl($event)"   accept="image/*"   name="coach_team_logo"/>
+		          					</label>
+		          				</div>
+          							
+								
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Team Name</label>
+									<input type="text" class="frm-control" placeholder="Team Name"  [(ngModel)]="coach_team_name"  required=""  name="coach_team_name" >
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Age Of Team</label>
+									<div class="pointer">
+										<span></span>
+										<select class="frm-control" name="coach_age_of_team" [(ngModel)]="coach_age_of_team" required=""  >
+											 <option *ngFor="let age_group of age_groups" value= {{age_group.id}}>								              
+								              <span>{{age_group.val}}</span>					              
+								            </option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Address</label>
+									<input type="text" class="frm-control" placeholder="Address"  name="coach_address" required [(ngModel)]="coach_address" >
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Address 2</label>
+									<input type="text" class="frm-control" placeholder="Address (Optional)" name="coach_address2"  [(ngModel)]="coach_address2" >
+								</div>
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>State</label>
+									<!--<div class="pointer">
+										<span></span>
+										<select class="frm-control"  name="coach_state"  [(ngModel)]="coach_state" required="" >
+											<option *ngFor="let state of states" value= {{state}}>
+								              {{state}}
+								            </option>
+										</select>										
+									</div>-->
+									<input type="text" class="frm-control"  name="coach_state" required="" placeholder="State" [(ngModel)]="coach_state">
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>City</label>
+									<!--<div class="pointer">
+										<span></span>
+										<select class="frm-control" name="coach_city"  [(ngModel)]="coach_city"  required="" >
+											<option *ngFor="let city of cities" value= {{city}}>
+								              {{city}}
+								            </option>
+										</select>
+									</div>-->
+									<input type="text" class="frm-control"  name="coach_city" required="" placeholder="City" [(ngModel)]="coach_city">
+								</div>
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Zip Code</label>
+									<input type="text" class="frm-control" maxlength="6"  name="coach_zipcode" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" max-length="6" placeholder="Zipcode" required=""  [(ngModel)]="coach_zipcode">
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Phone Number</label>
+									<input type="text" class="frm-control" [(ngModel)]="coach_phone_number" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" required="" max-length="12" name="coach_phone_number" placeholder="Phone Number" >
+								</div>
+							</div>
+						</div>
+						
+						<hr class="line">
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Email Address</label>
+									<input type="email" class="frm-control" placeholder="email@xyz.com"  [(ngModel)]="coach_email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required=""  name="coach_email"  >
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col showPass">
+									<label>Password</label>
+									<input type="password" class="frm-control" placeholder="******" [(ngModel)]="coach_password" required=""  id="password"  name="coach_password" >
+									<span id="show_password" (click)="showPassword()">SHOW</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Confirm Password</label>
+									<input type="password" class="frm-control" placeholder="******" [(ngModel)]="coach_confirm_password"  required=""  name="coach_confirm_password"  >
+								</div>
+							</div>
+						</div>
+
+						<hr class="line">
+
+						<div class="cf">
+							<div class="col-2">
+								<label class="checkFull">
+								  <input type="radio" name="payment_option" required="" (click)="payment_option=1" >
+								  <div class="checkmark">
+								  	Pay For yourself only
+								  </div>
+								</label>
+							</div>
+							<div class="col-2">
+								<label class="checkFull">
+								  <input type="radio"  name="payment_option" required="" (click)="payment_option=2" >
+								  <div class="checkmark">
+								  	Pay for yourself & your team
+								  </div>
+								</label>
+							</div>
+						</div>
+						<p class="notiTxt">By selecting the "Pay for Yourself Only" button your invites (players) will receive a link to purchase their subscription when they register.</p>
+					</div>
+
+					</div>
+
+					<div class="block-col">
+						<button type="submit"  [disabled]="!form.valid || submitClicked" class="blueFull-btn">NEXT</button>	
+					</div>
+				</form>
+			</div>
+		</div>
+	</div><br>
+	<!-- Coach Register -->
+
+	<!-- Player Register -->
+	<div class="register-col reg-coach"  *ngIf="step==3">
+		<div class="container-1110">
+			<div class="hgroup">
+				<h3>REGISTER AS PLAYER &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" (click)="goToStartPage()">Cancel</a></h3>
+			</div>
+			<div class="formWrap cf">
+				<h4><strong>Enter the details below</strong></h4>
+				<form (ngSubmit)="registerPlayer()" #form="ngForm" autocomplete="nope">
+				<div class="frm-col">
+					<div class="upload-img cf ">
+						
+							<figure>
+								<img [src]="player_image_url" *ngIf="player_image_url!=''" width="100">
+							</figure>
+							<div ng2FileDrop  [uploader]="player_uploader"></div>
+	          				
+	          				<div class="fileUploadbtn">
+	          					<label>
+	          						<button type="button" class="btn">Add Photo</button>
+	          						<input type="file"  (change)="readPlayerLogoUrl($event)"  ng2FileSelect [uploader]="player_uploader" class="fl-btn" [(ngModel)]="player_logo" name="player_logo" accept="image/*" />
+	          					</label>
+	          				</div>
+          				
+					</div>
+					<div class="formSection">
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>First Name</label>
+									<input type="text" [(ngModel)]="player_first_name" name="player_first_name" required="" class="frm-control" placeholder="Player First Name">
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Last Name</label>
+									<input type="text" class="frm-control"  [(ngModel)]="player_last_name"  required="" name="player_last_name"  placeholder="Player Last Name">
+								</div>
+							</div>
+						</div>
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col cf">
+									<label>Gender</label>
+									 <div class="radio">
+										<label>
+											<input name="o1" value="" type="radio"  (click)="selectGender(2)">
+											<span class="cr"><i class="cr-icon round-active"></i></span>
+											Male
+										</label>
+					                </div>
+					                <div class="radio">
+										<label>
+											<input name="o1" value="" type="radio"  (click)="selectGender(1)">
+											<span class="cr"><i class="cr-icon round-active"></i></span>
+											Female
+										</label>
+					                </div>
+
+					               
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Birth Day</label>
+									<!--<input type="text" [(ngModel)]="player_age"  name="player_age"  class="frm-control"  required=""  max-length="3"  placeholder="Birth Day" (keyup)="showParents()">-->
+									<input class="form-control" placeholder="yyyy-mm-dd"
+             							name="dp"  ngbDatepicker #d="ngbDatepicker" [minDate]="minDate" [maxDate]="datepicker"  class="frm-control"  required="" [navigation]="select" (click)="d.toggle()" (ngModel)="datepicker" (ngModelChange)="onDateChange($event)" >
+								</div>
+							</div>
+						</div>
+						<hr class="line">
+						<div class="cf">
+							<div class="col-2"  *ngIf="disable_pre_filled_properties" >
+								<div class="field-col">
+									<label>Coach Name</label>
+									<input type="text" [(ngModel)]="player_coach_name" class="frm-control" placeholder="Name"  name="player_coach_name" >
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Sport</label>
+									<div class="pointer">
+										<span></span>
+										<select class="frm-control" required=""  [disabled]="disable_pre_filled_properties"   name="player_sport"  [(ngModel)]="player_sport" >
+											 <option *ngFor="let sport of sports" value= {{sport.id}}>
+								              {{sport.name}}
+								            </option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2" *ngIf="disable_pre_filled_properties" >
+								<div class="field-col">
+									<label>Club Name</label>
+									<input type="text" [(ngModel)]="player_club"     name="player_club"  class="frm-control" placeholder="Club Name">
+								</div>
+							</div>
+							<div class="col-2" *ngIf="disable_pre_filled_properties" >
+								<div class="field-col">
+									<label>Team Name</label>
+									<input type="text" [(ngModel)]="player_team_name"     name="player_team_name"  class="frm-control" placeholder="Team Name">
+								</div>
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Address</label>
+									<input type="text" [(ngModel)]="player_address"  required=""  class="frm-control" placeholder="Address"  name="player_address" >
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>State</label>
+									<!--<div class="pointer">
+										<span></span>
+										<select class="frm-control"  required=""  name="player_state"  [(ngModel)]="player_state" >
+											<option *ngFor="let state of states" value= {{state}}>
+								              {{state}}
+								            </option>
+										</select>
+									</div>-->
+									<input type="text" [(ngModel)]="player_state"  required=""  class="frm-control" placeholder="State"  name="player_state" >
+								</div>
+								
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>City</label>
+									<!--<div class="pointer">
+										<span></span>
+										<select class="frm-control" [(ngModel)]="player_city"  required=""  name="player_city" >
+											<option *ngFor="let city of cities" value= {{city}}>
+								              {{city}}
+								            </option>
+										</select>
+									</div>-->
+									<input type="text" [(ngModel)]="player_city"  required=""  class="frm-control" placeholder="City"  name="player_city" >
+								</div>
+								
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Zip Code</label>
+									<input type="text"  name="player_zipcode" placeholder="Zipcode" required=""  class="frm-control" [(ngModel)]="player_zipcode"  onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" max-length="6">
+								</div>
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Phone Number</label>
+									<input type="text" class="frm-control" required="" placeholder="Phone Number" [(ngModel)]="player_phone_number" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" name="player_phone_number"  max-length="12"  >
+								</div>
+							</div>
+						</div>
+						
+						<hr class="line">
+						
+						<div class="cf" *ngIf="show_parent==1">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Parent One</label>
+									<input type="text" class="frm-control" placeholder="Name" [(ngModel)]="player_parent_one_name"  name="player_parent_one_name" >
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Phone Number of Parent One</label>
+									<input type="text" class="frm-control" placeholder="Phone" [(ngModel)]="player_parent_one_phone"  max-length="12"  name="player_parent_one_phone" >
+								</div>
+							</div>
+						</div>
+
+						<div class="cf" *ngIf="show_parent==1">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Email Address of Parent One</label>
+									<input type="email" class="frm-control" placeholder="Email" [(ngModel)]="player_parent_one_email"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"  name="player_parent_one_email" >
+								</div>
+							</div>
+						</div>
+
+						<hr class="line" *ngIf="show_parent==1">
+						
+						<div class="cf" *ngIf="show_parent==1">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Parent Two</label>
+									<input type="text" class="frm-control" placeholder="Name" [(ngModel)]="player_parent_two_name"  name="player_parent_two_name" >
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col">
+									<label>Phone Number of Parent Two</label>
+									<input type="text" class="frm-control" placeholder="Phone" [(ngModel)]="player_parent_two_phone"  max-length="12"   name="player_parent_two_phone" >
+								</div>
+							</div>
+						</div>
+
+						<div class="cf" *ngIf="show_parent==1">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Email Address of Parent Two</label>
+									<input type="email" class="frm-control" placeholder="Email" [(ngModel)]="player_parent_two_email"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"  name="player_parent_two_email" >
+								</div>
+							</div>
+						</div>
+
+						<hr class="line" *ngIf="show_parent==1">
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Email Address</label>
+									<input type="email" class="frm-control" placeholder="email@xyz.com" [(ngModel)]="player_email"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"  required=""  name="player_email" >
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="field-col showPass">
+									<label>Password</label>
+									<input type="password" class="frm-control" placeholder="******" [(ngModel)]="player_password" required=""  id="password" name="player_password" >
+									<span id="show_password"   (click)="showPassword()">SHOW</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="cf">
+							<div class="col-2">
+								<div class="field-col">
+									<label>Confirm Password</label>
+									<input type="password" class="frm-control" placeholder="******" [(ngModel)]="player_confirm_password"  required=""  name="player_confirm_password" >
+								</div>
+							</div>
+							<!--<div class="col-2">
+								<div class="field-col">
+									<label>Other Sports</label>
+									<div class="add-btn-col cf">
+										<input type="text" class="frm-control w-80">
+										<button type="button" class="btn">Add</button>
+									</div>
+								</div>
+							</div>-->
+						</div>
+					</div>
+				</div>
+
+				<div class="block-col">
+					<button type="submit"   [disabled]="!form.valid || submitClicked"  class="blueFull-btn">NEXT</button>	
+				</div>
+			</form>
+			</div>
+		</div>
+	</div><br>
+	<!-- Player Register -->
+
+	<!-- Payment  -->
+	<div class="register-col" *ngIf="step==4">
+		<div class="container-1110">
+			<div class="hgroup">
+				<h3>Payment</h3>
+				<h4>Please check the details below and make payment</h4>
+			</div>
+			<div class="formWrap nobg-mob p-0 pb-10" *ngIf="role==2">
+				<div class="cf mobileTitle">
+					<h2>
+						<span>Coach Details</span>
+						<!--<a (click)="editDetails()" class="btn">Edit</a>-->
+					</h2>
+				</div>
+				<table class="paymentList table-one table-two">
+					<tr>
+						<th width="25%">Coach Details</th>
+						<th width="45%">&nbsp;</th>
+						<th width="20%">Price</th>						
+					</tr>
+					<tr>
+						<td>{{coach_name}}</td>
+						<td>{{coach_email}}</td>
+						<td>${{amount}}</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="formWrap nobg-mob p-0 pb-10" *ngIf="role==3">
+				<div class="cf mobileTitle">
+					<h2>
+						<span>Player Details</span>
+						<!--<a (click)="editDetails()" class="btn">Edit</a>-->
+					</h2>
+				</div>
+				<table class="paymentList table-one table-two">
+					<tr>
+						<th width="25%">Player Details</th>
+						<th width="45%">&nbsp;</th>
+						<th width="20%">Price</th>						
+					</tr>
+					<tr>
+						<td>{{player_first_name}} {{player_last_name}}</td>
+						<td>{{player_email}}</td>
+						<td>${{amount}}</td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="h20"></div>
+
+			<div class="formWrap nobg-mob p-0 pb-10" *ngIf="payment_option==2">
+				<div class="cf mobileTitle">
+					<h2>
+						<span>Player Deatils</span>
+						<!--<a href="" class="btn">Edit</a>-->
+					</h2>
+				</div>
+				<table class="paymentList table-one">
+					<tr >
+						<th width="25%">Player Details</th>
+						<th width="45%">&nbsp;</th>
+						<th width="20%">Price</th>
+						<!--<th width="10%"><span class="btn">Edit</span></th>-->
+					</tr>		
+					<tr *ngFor="let coach_player of coach_players; let i=index" >
+						<td>{{coach_player.coach_player_first_name}} {{coach_player.coach_player_last_name}}</td>
+						<td>{{coach_player.coach_player_email}}</td>
+						<td>$10</td>
+						<td>
+							<a href="javascript:void(0)" (click)="removePlayer(i)"><img src="assets/images/delete_payment.png" alt="delete"></a>
+						</td>
+					</tr>
+			
+				</table>
+			</div>		
+			<div class="h20"></div>
+			<div class="formWrap p-0 pb-10">
+				<table class="paymentList tablePaid">
+					<tr>
+						<th width="36%"><h1>Total Amount to be Paid <span class="showMobile">${{amount}}</span></h1></th>
+						<th width="30%" class="hideMob">&nbsp;</th>
+						<th width="34%" class="hideMob"><h1>${{amount+(coach_players.length)*10}}</h1></th>
+					</tr>
+					<tr>
+						<td><h3>Promo Code To Avail The Discount</h3></td>
+						<td><input type="text" class="coupnCode" placeholder="Enter Code"></td>
+						<td class="aplyTxt">
+							<button class="txtBtn">Apply</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="block-col mo-m-20">				
+				
+				<button type="submit" class="blueFull-btn" (click)="showPaymentForm()">MAKE PAYMENT</button>	
+			</div>
+		</div>
+	</div><br>
+	<!-- Payment -->
+
+<!-- Payment Form -->
+<div class="register-col" *ngIf="step==5">
+	<div class="hgroup">
+		<h3>Enter your card details to make payment</h3>	
+		<h1 *ngIf="!showDropinUI">Please wait...</h1>	
+	</div>
+<div id="dropin-container" *ngIf="showDropinUI && clientToken" ></div>
+<button  type="submit" class="blueFull-btn" id="submit-button" (click)="pay()"  *ngIf="showDropinUI && clientToken"  [disabled]="isClicked" >Pay</button>
+
+</div>
+<!-- Payment Form -->
+
+<!-- ADD PLAYER BY COACH -->
+<div class="register-col" *ngIf="step==6">
+	<div class="container-1110">
+		<div class="hgroup">
+			<h3>ADD PLAYER</h3>
+			<h4>Add each Player's name and email</h4>
+		</div>
+		<div class="formWrap cf">
+			<h4>Enter the details below</h4>
+				<div class="append-col">
+				<form (ngSubmit)="addPlayerForCoach()" #forma="ngForm" autocomplete="nope">
+					<div class="field-col">
+						<label>Player First Name</label>
+					</div>
+				
+					<div class="field-col">
+						<label>Player Last Name</label>
+					</div>
+
+					<div class="field-col">
+						<label>Player Email</label>					
+					</div>
+
+					<div class="field-row-n cf" *ngFor="let coach_player of coach_players; let i=index" >
+
+						<div class="field-col">
+							
+							<input type="text" class="frm-control" placeholder="First Name" value="{{coach_player.coach_player_first_name}}" required="" [(ngModel)]="coach_player.coach_player_first_name" [ngModelOptions]="{standalone: true}" >
+						</div>
+					
+						<div class="field-col">
+							
+							<input type="text" class="frm-control" placeholder="Last Name"  value="{{coach_player.coach_player_last_name}}"  required=""  [(ngModel)]="coach_player.coach_player_last_name" [ngModelOptions]="{standalone: true}" >
+						</div>
+
+						<div class="field-col">
+							
+							<input type="email" class="frm-control" placeholder="Email"  required=""  value="{{coach_player.coach_player_email}}"  [(ngModel)]="coach_player.coach_player_email" [ngModelOptions]="{standalone: true}">
+
+						</div>
+						<span class="btn btn-danger"  *ngIf="i>0"  (click)="removePlayer(i)">-</span>
+					</div>
+					<div class="field-col cl-mob">
+						<button type="button" class="btn" (click)="addMorePlayer()">Add Players</button>
+					</div>
+				
+
+					<div class="block-col">
+						<button type="submit" class="blueFull-btn"  [disabled]="!forma.valid">CONTINUE</button>	
+					</div>		
+			</form>	
+			</div>
+		</div>
+	</div>
+</div><br>
+<!-- ADD PLAYER BY COACH -->

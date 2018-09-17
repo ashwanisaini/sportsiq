@@ -1,0 +1,82 @@
+<div class="banner-min">
+		<h1>Plan and Pricing</h1>
+	</div>
+<div class="plan-list">
+		<div class="container" >
+			<table>
+				<thead>
+					<tr>
+						<th>Feature</th>
+						<th *ngFor="let plan of all_plans">
+							{{plan.title}} - ${{plan.amount}}
+							<p>Valid for {{plan.duration}} days</p>
+						</th>
+						<!-- <th>Basic - $30 <p>Valid for 1 Month</p></th>
+						<th>Silver - $200 <p>Valid for 1 Year</p></th>
+						<th>Gold - $700 <p>Valid for 5 Year</p></th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let feature of parsed_data">
+						<td class="ttl-txt">{{feature.feature_name}}</td>
+						<td>{{feature[1]}}
+						</td>
+						<td>{{feature[2]}}
+						</td>
+						<td>{{feature[3]}}
+						</td>
+						<!--<td *ngFor="let fcheck of feature.features">-->
+							<!--<span *ngIf="fcheck.subscription_id==2">YES</span>-->
+						<!--</td>-->
+						<!--<td *ngFor="let fcheck of feature.features">-->
+							<!--<span *ngIf="fcheck.subscription_id==3">YES</span>-->
+						<!--</td>-->
+						<!--<td>Yes</td>-->
+						<!--<td>Yes</td>-->
+						<!--<td>Yes</td>-->
+					</tr>
+						<!-- <tr>
+							<td class="ttl-txt">Schedule</td>
+							<td>Yes</td>
+							<td>Yes</td>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<td class="ttl-txt">Messages</td>
+							<td>Yes</td>
+							<td>Yes</td>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<td class="ttl-txt">Payment on Web</td>
+							<td>Yes</td>
+							<td>Yes</td>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<td class="ttl-txt">Email Reminders</td>
+							<td>-</td>
+							<td>Yes</td>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<td class="ttl-txt">Statistics</td>
+							<td>Yes</td>
+							<td>Yes</td>
+							<td>Yes</td>
+						</tr>
+						<tr>
+							<td class="ttl-txt">Assignments</td>
+							<td>Yes</td>
+							<td>Yes</td>
+							<td>Yes</td>
+						</tr><tr>
+							<td class="ttl-txt">Priority Support</td>
+							<td>-</td>
+							<td>-</td>
+							<td>Yes</td>
+						</tr> -->
+				</tbody>
+			</table>
+		</div>
+	</div>

@@ -1,0 +1,19 @@
+.frm-control.ng-invalid {
+  border: 1px solid red;
+}
+
+ngb-datepicker.dropdown-menu {
+    position: absolute;
+    background: #fff;
+    z-index: 9;
+}
+.selectBox{
+    margin-bottom: 10px;
+    text-align: center;
+}
+.selectBox select{
+    border:2px solid grey;
+    border-radius:4px;
+    padding:2px 15px;
+    margin-left: 5px;
+}

@@ -1,0 +1,6 @@
+<div class="ads-container" *ngIf="advertisements.length > 0">
+	<a href="{{advertisements[0].link}}" target="_blank" title="clicking here will open a new window"><img src="http://18.220.70.32:3000/api/containers/advertisements/download/{{advertisements[0].image}}" alt="{{advertisements[0].name}}" class="ad-class" /></a>
+</div>
+<div class="ads-container" *ngIf="advertisements.length == 0">
+	<img src="assets/images/placeholder.png" class="ad-class"/>
+</div>

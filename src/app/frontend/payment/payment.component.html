@@ -1,0 +1,115 @@
+<!-- Payment  -->
+<div class="register-col" *ngIf="step==1">
+	<div class="container-1110">
+		<div class="hgroup">
+			<h3>Payment</h3>
+			<h4>Please check the details below and make payment</h4>
+		</div>
+		<div class="formWrap nobg-mob p-0 pb-10" *ngIf="role==2">
+			<div class="cf mobileTitle">
+				<h2>
+					<span>Coach Details</span>
+					<!--<a (click)="editDetails()" class="btn">Edit</a>-->
+				</h2>
+			</div>
+			<table class="paymentList table-one table-two">
+				<tr>
+					<th width="25%">Coach Details</th>
+					<th width="45%">&nbsp;</th>
+					<th width="20%">Price</th>						
+				</tr>
+				<tr>
+					<td>{{coach_name}}</td>
+					<td>{{coach_email}}</td>
+					<td>${{amount}}</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="formWrap nobg-mob p-0 pb-10" *ngIf="role==3">
+			<div class="cf mobileTitle">
+				<h2>
+					<span>Player Details</span>
+					<!--<a (click)="editDetails()" class="btn">Edit</a>-->
+				</h2>
+			</div>
+			<table class="paymentList table-one table-two">
+				<tr>
+					<th width="25%">Player Details</th>
+					<th width="45%">&nbsp;</th>
+					<th width="20%">Price</th>						
+				</tr>
+				<tr>
+					<td>{{player_first_name}} {{player_last_name}}</td>
+					<td>{{player_email}}</td>
+					<td>${{amount}}</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="h20"></div>
+
+		<div class="formWrap nobg-mob p-0 pb-10" *ngIf="payment_option==2">
+			<div class="cf mobileTitle">
+				<h2>
+					<span>Player Deatils</span>
+					<!--<a href="" class="btn">Edit</a>-->
+				</h2>
+			</div>
+			<table class="paymentList table-one">
+				<tr >
+					<th width="25%">Player Details</th>
+					<th width="45%">&nbsp;</th>
+					<th width="20%">Price</th>
+					<!--<th width="10%"><span class="btn">Edit</span></th>-->
+				</tr>		
+				<tr *ngFor="let coach_player of coach_players; let i=index" >
+					<td>{{coach_player.coach_player_first_name}} {{coach_player.coach_player_last_name}}</td>
+					<td>{{coach_player.coach_player_email}}</td>
+					<td>$10</td>
+					<td>
+						<a href="javascript:void(0)" (click)="removePlayer(i)"><img src="assets/images/delete_payment.png" alt="delete"></a>
+					</td>
+				</tr>
+		
+			</table>
+		</div>		
+		<div class="h20"></div>
+		<div class="formWrap p-0 pb-10">
+			<table class="paymentList tablePaid">
+				<tr>
+					<th width="36%"><h1>Total Amount to be Paid <span class="showMobile">${{amount}}</span></h1></th>
+					<th width="30%" class="hideMob">&nbsp;</th>
+					<th width="34%" class="hideMob"><h1>${{amount}}</h1></th>
+				</tr>
+				<tr>
+					<td><h3>Promo Code To Avail The Discount</h3></td>
+					<td><input type="text" class="coupnCode" placeholder="Enter Code"></td>
+					<td class="aplyTxt">
+						<button class="txtBtn">Apply</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="block-col mo-m-20">				
+			
+			<button type="submit" class="blueFull-btn" (click)="showPaymentForm()">MAKE PAYMENT</button>	
+		</div>
+	</div>
+</div><br>
+<!-- Payment -->
+
+<!-- Payment Form -->
+<div class="register-col" *ngIf="step==2">
+	<div class="hgroup">
+		<h3>Enter your card details to make payment</h3>	
+		<h1 *ngIf="!showDropinUI">Please wait...</h1>	
+	</div>
+<div id="dropin-container" *ngIf="showDropinUI && clientToken" ></div>
+<button  type="submit" class="blueFull-btn" id="submit-button" (click)="pay()"  *ngIf="showDropinUI && clientToken"  [disabled]="isClicked" >Pay</button>
+
+</div>
+<!-- Payment Form -->

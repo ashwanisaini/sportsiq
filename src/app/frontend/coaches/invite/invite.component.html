@@ -1,0 +1,122 @@
+<div class="register-col">
+	<div class="register-col">
+	<div class="container-1110">
+		<div class="hgroup">
+			<h3>INVITE PLAYER</h3>
+			<h4 *ngIf="step==1">Add each Player's name and email</h4>
+		</div>
+		<div class="formWrap cf" *ngIf="step==1">
+			<h4>Enter the details below</h4>
+				<form (ngSubmit)="addPlayerForCoach()" #form="ngForm" autocomplete="nope">
+				
+					<div class="full-width">
+						<div class="field-col">
+							<div class="pointer">
+								<label>Select Team</label>
+								<span></span>
+								<select class="frm-control" name="team_id" [(ngModel)]="team_id"  required="" >
+									 <option *ngFor="let team of teams;" value= {{team.id}}>
+						              {{team.team_name}}
+						            </option>
+								</select>
+							</div>
+						</div>
+					</div>
+
+					<div *ngFor="let coach_player of coach_players; let i=index">
+
+						<div class="field-col">
+							<label>Player First Name</label>
+							
+							<input type="text" class="frm-control" placeholder="First Name" value="{{coach_player.coach_player_first_name}}" required="" [(ngModel)]="coach_player.coach_player_first_name" [ngModelOptions]="{standalone: true}" >
+						</div>
+					
+						<div class="field-col">
+							<label>Player Last Name</label>	
+							<input type="text" class="frm-control" placeholder="Last Name"  value="{{coach_player.coach_player_last_name}}"  required=""  [(ngModel)]="coach_player.coach_player_last_name" [ngModelOptions]="{standalone: true}" >
+						</div>
+
+						<div class="field-col">
+							<label>Player Email</label>
+							<input type="email" class="frm-control player" placeholder="Email"  required=""  value="{{coach_player.coach_player_email}}"  [(ngModel)]="coach_player.coach_player_email" [ngModelOptions]="{standalone: true}">
+
+							<span class="btn btn-danger" *ngIf="i>0" (click)="removePlayer(i)">-</span>
+						</div>
+					</div>
+					<div class="field-col cl-mob">
+						<button type="button" class="btn" (click)="addMorePlayer()">Add Players</button>
+					</div>
+				
+
+					<div class="block-col">
+						<button type="submit" class="blueFull-btn"  [disabled]="!form.valid">CONTINUE</button>	
+					</div>		
+				</form>	
+		</div>
+	</div>
+
+	<!-- Payment  -->
+	<div class="register-col" *ngIf="step==2">
+		<div class="container-1110">
+			<div class="hgroup">
+				<h3>Payment</h3>
+				<h4>Please check the details below and make payment <button class="btn-blue" (click)="step=1">Back</button></h4>
+			</div>		
+			<div class="formWrap nobg-mob p-0 pb-10">
+				<div class="cf mobileTitle">
+					<h2>
+						<span>Player Deatils</span>
+						<!--<a href="" class="btn">Edit</a>-->
+					</h2>
+				</div>
+				<table class="paymentList table-one">
+					<tr >
+						<th width="25%">Player Details</th>
+						<th width="45%">&nbsp;</th>
+						<th width="20%">Price</th>
+						<!--<th width="10%"><span class="btn">Edit</span></th>-->
+					</tr>		
+					<tr *ngFor="let coach_player of coach_players; let i=index" >
+						<td>{{coach_player.coach_player_first_name}} {{coach_player.coach_player_last_name}}</td>
+						<td>{{coach_player.coach_player_email}}</td>
+						<td>$10</td>
+						<td>
+							<a href="javascript:void(0)" (click)="removePlayer(i)"><img src="assets/images/delete_payment.png" alt="delete"></a>
+						</td>
+					</tr>
+			
+				</table>
+			</div>		
+			<div class="h20"></div>
+			<div class="formWrap p-0 pb-10">
+				<table class="paymentList tablePaid">
+					<tr>
+						<th width="36%"><h1>Total Amount to be Paid <span class="showMobile">${{amount}}</span></h1></th>
+						<th width="30%" class="hideMob">&nbsp;</th>
+						<th width="34%" class="hideMob"><h1>${{(coach_players.length)*10}}</h1></th>
+					</tr>					
+				</table>
+			</div>
+
+			<div class="block-col mo-m-20">				
+				
+				<button type="submit" class="blueFull-btn" (click)="showPaymentForm()">MAKE PAYMENT</button>	
+			</div>
+		</div>
+	</div><br>
+	<!-- Payment -->
+
+	<!-- Payment Form -->
+	<div class="register-col" *ngIf="step==3">
+		<div class="hgroup">
+			<h3>Enter your card details to make payment</h3>	
+			<h1 *ngIf="!showDropinUI">Please wait...</h1>	
+		</div>
+	<div id="dropin-container" *ngIf="showDropinUI && clientToken" ></div>
+	<button  type="submit" class="blueFull-btn" id="submit-button" (click)="pay()"  *ngIf="showDropinUI && clientToken"  [disabled]="isClicked" >Pay</button>
+
+	</div>
+	<!-- Payment Form -->
+
+</div><br>
+</div>

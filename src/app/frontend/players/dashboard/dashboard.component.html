@@ -1,0 +1,123 @@
+<section class="container-bg">
+		<div class="container ps-relative">
+			<ul class="dashboard-tabs">
+				<li><a [routerLink]="['/frontend/player/dashboard']"  class="active"><i class="home-icon active"></i><span>My Teams</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/statistics']" ><i class="stats-icon"></i><span>Statistics</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/assignments']"><i class="assign-icon"></i><span>Assignments</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/feedback']" ><i class="feed-icon"></i><span>Feedback</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/messages']" ><i class="msg-icon"></i><span>My Messages</span></a></li>
+				<li><a href="javascript:void(0)"><i class="book-icon"></i><span>Education Module</span></a></li>
+			</ul>
+			<div class="dashboard-container	">
+				<div class="dashboard-block">
+					<div class="dashboard-head">
+						<h2 class="h2-dash">My Teams</h2>
+					</div>
+					<div class="dashboard-stats-block stats-border">
+						<ul class="stat-tabs">
+							<li><a href="javascript:void(0);" class="active"><span>Invitations</span></a></li>
+							<li><a href="javascript:void(0);"><span>Joined Teams</span></a></li>
+						</ul>
+
+						<div class="team-tab-block ">
+						<table class="table-dash table-player-team table-team" cellpadding="0" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Team Name</th>
+								<th>Sports</th>
+								<th>Owner</th>
+								<th>Invitation Message</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let invitation of invitations">
+								<td>
+									<figure class="profile-img">											
+										<a data-lightbox="lightbox"  *ngIf="invitation.team_logo!=''" href="{{image_path}}{{invitation.team_logo}}"  data-title=""><img src="{{image_path}}{{invitation.team_logo}}" width="100" /></a>
+									</figure>
+									<span class="teamname">{{invitation.team_name}}</span>
+
+								</td>
+								<td>
+									<span>{{invitation.name}}</span>
+								</td>
+								<td>
+									<span>{{invitation.first_name}} {{invitation.last_name}}</span>
+								</td>
+								<td>
+									<span class="team-player-message">
+										
+									</span>
+								</td>
+								<td>
+
+									<span class="action-link"  *ngIf="invitation.has_joined==0 && invitation.expires_in<=10">
+										<a href="javascript:void(0)" (click)="invitationAction(1,'Accept',invitation)" class="acc_lnk">Accept</a>
+										<br/>
+										<a href="javascript:void(0)"  (click)="invitationAction(2,'Decline',invitation)" class="decline-link">Decline</a>
+									</span>
+									<span *ngIf="invitation.has_joined==1" class="action-link">ACCEPTED</span>
+									<span *ngIf="invitation.has_joined==2" class="decline-link">DECLINED</span>
+									<span *ngIf="invitation.has_joined==0 && invitation.expires_in >10" class="decline-link">Expired {{invitation.expiry_date | timeAgo}}</span>
+								</td>
+							</tr>
+											
+						</tbody>
+						</table>
+						</div>
+						<div class="team-tab-block hideTab">
+						<table class="table-dash table-join-team" cellpadding="0" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Photo</th>
+								<th>Team Name</th>
+								<th>Sports</th>
+								<th>Owner</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let team of teams">
+								<td>
+									<span class="profile-tb-block">
+										<figure class="profile-img">
+											<a data-lightbox="lightbox"  *ngIf="team.team_logo!=''" href="{{image_path}}{{team.team_logo}}"  data-title=""><img src="{{image_path}}{{team.team_logo}}" width="100" /></a>
+										</figure>
+									</span>
+								</td>
+								<td>
+									<span>
+										<a href="javascript:void(0)" class="profile-link">{{team.team_name}}</a>
+									</span>
+								</td>
+								<td>
+									<span>
+										{{team.sport_name}}
+									</span>
+								</td>
+								<td>
+									<span>
+										{{team.first_name}} {{team.last_name}}
+									</span>
+								</td>
+								<td>
+									<span class="action-link">
+										<a href="javascript:void(0)" *ngIf="team.has_joined==1" (click)="teamAction(0,'Leave',team)" class="leave-status">Leave The Team</a>
+										<a href="javascript:void(0)" *ngIf="team.has_joined==0" (click)="teamAction(1,'Rejoin',team)">Rejoin Team</a>
+									</span>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<app-right-ads></app-right-ads>
+
+		</div>	
+	</section>

@@ -1,0 +1,142 @@
+<section class="container-bg">
+	<div class="container ps-relative">
+		
+			<ul class="dashboard-tabs">
+				<li><a [routerLink]="['/frontend/player/dashboard']"><i class="home-icon"></i><span>My Teams</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/statistics']"  class="active"><i class="stats-icon"></i><span>Statistics</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/assignments']"><i class="assign-icon active"></i><span>Assignments</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/feedback']" ><i class="feed-icon"></i><span>Feedback</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/messages']" ><i class="msg-icon"></i><span>My Messages</span></a></li>
+				<li><a href="javascript:void(0)"><i class="book-icon"></i><span>Education Module</span></a></li>
+			</ul>
+			<div class="dashboard-container	">
+			<div class="dashboard-block"  *ngIf="player_statistics==0">
+				<div class="dashboard-head">
+					<h2 class="h2-dash">Team Leaderboard</h2>
+					<div class="dropdown-button">
+						<div class="wrapper-dropdown-2" id="drop1" tabindex="1">{{team_drop_down_text}}
+							<ul class="dropdown">
+								<li *ngFor="let team of teams">
+									<a href="javascript:void(0);" (click)="selectTeam(team.id,team.team_name)">{{team.team_name}}</a>
+								</li>								
+							</ul>
+						</div>
+					</div>
+				</div>				
+				<table class="table-dash table-leader" cellpadding="0" cellspacing="0">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th class="th-leader" *ngFor="let pillar of pillar_ids">{{pillars[pillar]}}</th>
+								<th>Overall</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let player of players; let i=index">
+								<td *ngIf="player.total_score>threshold_value">
+									<span>
+										<a href="javascript:void(0)" *ngIf="user_id==player.user_id" (click)="showStatistics(player)" class="profile-link">{{player.name}}</a>
+										<span *ngIf="user_id!=player.user_id" class="profile-link">{{player.name}}</span>
+									</span>									
+								</td>
+								<td *ngFor="let pillar of pillar_ids">
+									<span class="grey-small" *ngIf="player[pillar] && player.total_score>threshold_value">{{player[pillar]}}</span>
+									<span class="grey-small" *ngIf="!player[pillar] && player.total_score>threshold_value">0</span>
+								</td>
+								
+								<td *ngIf="player.total_score>threshold_value"><span>{{player.total_score}} <img src="assets/images/1.png" class="total-trophy" *ngIf="i==0" /></span></td>
+							</tr>	
+							<tr class="stats-colspan" *ngIf="players.length">
+								<td colspan="7"><span class="grey-small">Above the line in Good {{threshold_value}} +</span></td>
+							</tr>
+							<tr *ngFor="let player of players; let i=index">
+								<td *ngIf="player.total_score<=threshold_value">
+									<span>
+										<a href="javascript:void(0)" *ngIf="user_id==player.user_id" (click)="showStatistics(player)" class="profile-link">{{player.name}}</a>
+										<span *ngIf="user_id!=player.user_id" class="profile-link">{{player.name}}</span>
+									</span>									
+								</td>
+								<td *ngFor="let pillar of pillar_ids">
+									<span class="grey-small" *ngIf="player[pillar] && player.total_score<=threshold_value">{{player[pillar]}}</span>
+									<span class="grey-small" *ngIf="!player[pillar] && player.total_score<=threshold_value">0</span>
+								</td>
+								
+								<td *ngIf="player.total_score<=threshold_value"><span>{{player.total_score}} </span></td>
+							</tr>	
+						</tbody>
+					</table>
+
+					<button class="btn-blue btn-bottom-mobile">Add New Player</button>
+			</div>
+
+
+
+			<!-- Player Statistics -->
+			<div class="dashboard-block" *ngIf="player_statistics==1">
+				<div class="dashboard-head">
+					<h2 class="h2-dash" >{{player_details.name}} <span class="score-info"  *ngIf="player_details.name">(Overall Score : {{player_details.total_score}})</span></h2>
+
+
+					<button class="btn-blue" (click)="player_statistics=0;getTeams();">Back</button>
+					<div class="dropdown-button">
+						<div class="wrapper-dropdown-2" id="drop1" tabindex="1">{{team_drop_down_text}}
+							<ul class="dropdown">
+								<li *ngFor="let team of teams">
+									<a href="javascript:void(0);" (click)="selectTeam(team.id,team.team_name)">{{team.team_name}}</a>
+								</li>								
+							</ul>
+						</div>
+
+						<div class="wrapper-dropdown-2" id="drop2" tabindex="1">{{player_drop_down_text}}
+							<ul class="dropdown">
+								<li *ngFor="let player of players">
+									<a href="javascript:void(0);" (click)="showStatistics(player)">{{player.name}}</a>
+								</li>								
+							</ul>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="dashboard-stats-block stats-border" *ngIf="player_details.name">
+					<ul class="stat-tabs">
+						<li  *ngFor="let pillar of pillar_ids">
+							<a href="javascript:void(0);"  class="active" *ngIf="current_pillar_id==pillar" (click)="showPillarData(pillar)">
+								<span>{{pillars[pillar]}}<span class="pipe">-</span> 
+									<span *ngIf="player_details[pillar]">{{player_details[pillar]}}</span>
+									<span *ngIf="!player_details[pillar]">0</span>
+								</span>
+							</a>
+							<a href="javascript:void(0);" *ngIf="current_pillar_id!=pillar" (click)="showPillarData(pillar)">
+								<span>{{pillars[pillar]}}<span class="pipe">-</span> 
+									<span *ngIf="player_details[pillar]">{{player_details[pillar]}}</span>
+									<span *ngIf="!player_details[pillar]">0</span>
+								</span>
+
+							</a>
+						</li>	
+					</ul>
+					<div class="stats-question-block">
+						<div class="question-block">
+							<!--<div class="question-label">
+								<i class="icon-box plus"></i>
+								<span class="q-head">Formation - 20 - Technical</span>
+							</div>-->
+							<div class="question-rows-block">
+								<div class="question-rows" *ngFor="let d of pillar_statstics_data;let i=index">
+									<span class="num">Que {{i+1}}.</span>
+									<span *ngIf="d.correct_answer==d.answer_id" class="con green">{{d.question}}</span>
+									<span *ngIf="d.correct_answer!=d.answer_id" class="con red">{{d.question}}</span>
+								</div>								
+							</div>
+						</div>						
+					</div>					
+				</div>
+			</div>
+			
+		<!-- Player Statistics -->
+
+		</div>
+		<app-right-ads></app-right-ads>
+	</div>
+</section>

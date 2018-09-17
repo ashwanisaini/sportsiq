@@ -1,0 +1,47 @@
+.btn-blue-start {
+    background-color: #007AC2;
+    height: 25px;
+    padding: 3px 20px 0px 20px;
+    border: none;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    /* display: -webkit-box; */
+    display: -ms-flexbox;
+    display: flex;
+    /* float: right; */
+    /* text-align: right; */
+    margin-left: 20px;
+}
+
+.status-button-complete{
+        width: auto !important;
+    height: auto;
+    padding: 4px;
+    font-size: 12px;
+    background: green;
+    color: #fff;
+
+}
+
+.status-button-in-progress{
+        width: auto !important;
+    height: auto;
+    padding: 4px;
+    font-size: 12px;
+    background: #007AC2;
+    color: #fff;
+
+}
+
+.status-button-pending{
+        width: auto !important;
+    height: auto;
+    padding: 4px;
+    font-size: 12px;
+    background: red;
+    color: #fff;
+
+}

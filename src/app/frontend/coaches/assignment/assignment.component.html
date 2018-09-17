@@ -1,0 +1,246 @@
+<section class="container-bg">
+	<div class="container ps-relative">
+		
+			<ul class="dashboard-tabs">
+				<li><a [routerLink]="['/frontend/coach/dashboard']"><i class="home-icon"></i><span>My Teams</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/roster']" ><i class="roster-icon"></i><span>Roster</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/statistics']" ><i class="stats-icon"></i><span>Statistics</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/assignments']" class="active"><i class="assign-icon active"></i><span>Assignments</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/feedback']" ><i class="feed-icon"></i><span>Feedback</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/messages']" ><i class="msg-icon"></i><span>My Messages</span></a></li>
+			</ul>
+
+			<div class="breadcrumbs"><a [routerLink]="['/frontend/coach/assignments']" >Assignments</a> / Assign</div>
+			<div class="dashboard-container	">
+			<div class="dashboard-block dashboard-block-top">
+				<div *ngIf="divToDisplay==1">
+					<div class="dashboard-head dashboard-head-cust cf">
+						<h2 class="h2-dash">Assignments</h2>
+
+					<!-- 	<div class="rightArea-s">
+							<div class="selectBox field-col">
+								<label>Select Team </label>
+								<div class="pointer">
+									<span></span>
+									<select class="frm-control" name="team_id" [(ngModel)]="team_id"  required="" (change)="getPlayers($event.target.value)">
+									<option value=''>Select Team</option>
+									<option *ngFor="let team of teams" value={{team.id}}>
+										{{team.team_name}}
+									</option>
+								</select>
+								</div>
+							</div>
+							<button class="btn-blue" (click)="assignStepTwo()" *ngIf="canAssign==1">Assign</button>
+							<button class="btn-grey" disabled="" *ngIf="canAssign==0">Assign</button>
+						</div> -->
+
+						<div _ngcontent-c1="" class="rightArea-s">
+							<div _ngcontent-c1="" class="field-col selectBox">
+								<label _ngcontent-c1="">Select Team </label>
+
+									<div _ngcontent-c1="" class="pointer">
+									<div class="dropdown-button">
+										<div class="wrapper-dropdown-2" id="drop1" tabindex="1">
+										<div class="dropdown-N">
+												<p>select</p>
+												<ul class="dropdown">
+													<li *ngFor="let team of teams">
+									<a href="javascript:void(0);" (click)="selectTeam(team.id,team.team_name)">{{team.team_name}}</a>
+								</li>							
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<button _ngcontent-c1="" class="btn-grey" disabled="">Assign</button>
+						</div> 
+						</div>
+
+					<div class="assignments-search assign-search" *ngIf="all_invited_players.length!=0">
+						<span class="search-label">Search Player</span>
+						<input type="text" class="search-box search-Text" [(ngModel)]="search_query" />
+					    <button class="btn-blue btn-search">Search</button>
+						<a href="javascript:void(0)" (click)="search_query='';" class="reset-link">Reset</a>
+					</div>
+
+					<div class="assignments-block"  *ngIf="all_invited_players.length!=0">
+						<table class="table-dash table-assign customTable" cellpadding="0" cellspacing="0">
+							<tbody>
+								<tr>
+									<td colspan="2" class="select-assign-td">
+										<span>
+											<label class="checkbox-label checkbox-select">
+											   <input type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll($event);"/>
+											  <span></span> 
+											  Select All
+											</label>											
+										</span>
+									</td>
+								</tr>
+								<tr class="row-active" *ngFor="let all_invited_player of all_invited_players | search:'name':search_query">
+									<!--<pre>{{all_invited_player | json}}</pre>-->
+									<td>
+										<span>
+											<label class="checkbox-label">
+											  <input type="checkbox" [(ngModel)]="all_invited_player.selected" (change)="checkIfAllSelected($event,all_invited_player.id);">
+											  <span></span>
+											  {{all_invited_player.name}}
+											</label>											
+										</span>
+									</td>
+									<td><!--<span><a href="javascript:void(0);">View Assignments</a></span>--></td>
+								</tr>							
+								
+							</tbody>
+						</table>
+					</div>
+
+					<div class="assignments-block"  *ngIf="all_invited_players.length==0 && team_id!=''">
+						<h3>No player found for the selected team.</h3>
+					</div>
+
+					<div class="assignments-block"  *ngIf="team_id==''" style="margin-left:21px;">
+						<h2>Please select a team to assign the modules to players.</h2>
+					</div>
+				</div><!-- *ngIf="divToDisplay==1" END HERE -->
+
+				<div *ngIf="divToDisplay==2">
+					<div class="dashboard-block dashboard-col">
+						<div class="dashboard-head">
+							<h2 class="h2-dash">Assign</h2>
+							<span class="instruction">Click the button to "assign" the selected modules to players</span>
+							<button class="btn-blue btn-desktop" (click)="resetData()"><i class="check-icon"></i>Back</button>
+							<button class="btn-blue btn-desktop" (click)="assignPlayers()" *ngIf="canAssignStepTwo==1"><i class="check-icon"></i>Assign</button>
+							<button class="btn-grey" *ngIf="canAssignStepTwo==0"><i class="check-icon"></i>Assign</button>
+							<!-- <button class="btn-grey btn-desktop"></button> -->
+						</div>
+						<table class="table-dash table-team" cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<th>Select module to assign <em class="instruction">(Please select  modules from below)</em></th>
+								</tr>
+							</thead>
+						</table>
+
+						<!--  -->
+						<div class="dashboard-stats-block stats-border">
+							<div class="stats-question-block">
+
+                  
+								<div class="question-block assi-wrap" *ngFor="let module_with_scene of module_with_scenes">
+									<div class="checkbox">
+										<label class="switch">
+										  <input type="checkbox"  [(ngModel)]="selectedAllScenes[module_with_scene.id]" (change)="selectAllScenes($event,module_with_scene.id);">
+										  
+										  <span class="red-text" *ngIf="module_with_scene.select_text=='Unselect'">{{module_with_scene.select_text}}</span>
+
+										  <span class="green-text" *ngIf="module_with_scene.select_text=='Select'">{{module_with_scene.select_text}}</span>
+										</label>
+				                	</div>
+									<div class="question-label">
+										
+										<span class="q-head">{{module_with_scene.name}}</span>
+									</div>
+									<div class="question-rows-block" style="display:block;" *ngIf="selectedAllScenes[module_with_scene.id]==true">
+										<div class="innerListHead cf">
+											<ul class="cf">
+												<li  *ngFor="let sub_module of sub_modules">
+													<label class="switch" *ngIf="sub_module.module_id==module_with_scene.id">
+													  <input type="checkbox"  (change)="selectAllScenesBySubModule($event,sub_module.id,module_with_scene.id);" [(ngModel)]="sub_module.selected">
+													  <span class="red-text" *ngIf="sub_module.selected">Unselect</span>
+													  <span class="green-text" *ngIf="!sub_module.selected">Select</span>
+													</label>
+													<span class="txt-list" *ngIf="sub_module.module_id==module_with_scene.id">{{sub_module.name}}</span>
+												</li>											
+											</ul>
+										</div>
+										<div class="assi-col">
+											<div class="assign-main-box" *ngFor="let scene of module_with_scene.scenes; let i = index" >
+												<div class="assi-box"  *ngIf="scene.show" >
+													<div class="checkbox">
+														<label class="switch">
+														  <input type="checkbox" value="{{scene.scene_id}}"  [(ngModel)]="all_invited_players_for_module[module_with_scene.id][0][i].selected" (change)="checkIfAllSelectedScenes($event,scene.scene_id,module_with_scene.id,i,scene.sub_module_id);">
+														  <span class="red-text" *ngIf="all_invited_players_for_module[module_with_scene.id][0][i].selected">Unselect</span>
+														  <span class="green-text" *ngIf="!all_invited_players_for_module[module_with_scene.id][0][i].selected">Select</span>
+														</label>
+													</div>
+													<p>{{scene.scene_name}}</p>
+													<figure>
+								                        <a data-lightbox="lightbox"  href="{{image_source}}/{{scene.container}}/download/{{scene.admin_media_url}}"  data-title=""><img src="{{image_source}}/{{scene.container}}/download/{{scene.admin_media_url}}" /></a>
+								                        <a href="javascript:void(0);" (click)="viewDetails(scene);">View Details</a>
+						                    		</figure>
+						                    	</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<table class="table-dash table-team" cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<th>Assigning to</th>
+								</tr>
+							</thead>
+						</table>
+						<div class="assignto">
+							<ul class="cf">								
+								<li *ngFor="let player of selected_user_ids">{{user_names_array[player]}}<span (click)="removePlayer(player)"></span></li>
+							</ul>
+						</div>
+					</div>
+				</div> <!-- *ngIf="divToDisplay==2" END HERE -->
+
+			</div>
+
+
+		</div>
+		<app-right-ads></app-right-ads>
+	</div>	
+</section>
+
+<!-- Scene details popup -->
+<div class="overlay" *ngIf="showScenePopup==1"></div>
+<div class="assignDialogBox" *ngIf="showScenePopup==1">
+    <img src="assets/images/close.png" class="closePopup" (click)="showScenePopup=0">
+    <div class="modalheader">
+      <h2>{{current_scene.name}}</h2>
+    </div>
+    <div class="modal-body">
+      <div class="imgBox">
+        <a data-lightbox="lightbox"  href="{{image_source}}/{{current_scene.container}}/download/{{current_scene.admin_media_url}}"  data-title=""><img src="{{image_source}}/{{current_scene.container}}/download/{{current_scene.admin_media_url}}" /></a>
+      </div>
+      <div class="contentWrapper">
+        <div class="contentBox">
+          <div class="textArea">
+            <h4>This Drill is Taken From...</h4>
+            <p>
+              {{current_scene.reference}}
+            </p>
+            <div class="checkbox">
+              <label>
+                <input name="o1" value="" type="checkbox">
+                <span class="cr"><i class="cr-icon round-active"></i></span>
+                <span class="title">MORE INFO</span>
+              </label>
+            </div>
+          </div>
+          <figure *ngIf="current_scene.reference_image">
+            <a data-lightbox="lightbox"  href="{{image_source}}/{{current_scene.container}}/download/{{current_scene.reference_image}}"  data-title=""><img src="{{image_source}}/{{current_scene.container}}/download/{{current_scene.reference_image}}" /></a>
+          </figure>
+        </div>
+        <div class="contentBox">
+          <h4>Description</h4>
+          <p>
+            {{current_scene.description}}
+          </p>
+          <h4>Objective</h4>
+          <p>
+            {{current_scene.objective}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Scene details page -->

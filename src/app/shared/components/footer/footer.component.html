@@ -1,0 +1,26 @@
+<div class="gray-col" *ngIf="!isUserLoggedIn && current_page!='/register'  && current_page!='/home'  && current_page!='/join' && current_page!='/reset-password'">
+		<h1>GET STARTED TODAY AND INCREASE YOUR TEAMS SPORTS IQ!<a [routerLink]="['/register']" class="diagonal-btn">register</a></h1>
+	</div>
+
+	
+<div class="footer" *ngIf="current_page!='/register'">
+	<div class="container cf">
+		<div class="col-3">
+			<ul class="cf">
+				<li><a href="">Privacy Policy</a></li>
+				<li><a href="">Terms Of Use</a></li>
+			</ul>
+		</div>
+		<div class="col-3 text-center">
+			<p>© Copyright Sports IQ 2018</p>
+		</div>
+		<div class="col-3">
+			<ul class="cf socialIco">
+				<li>Follow Us :</li>
+				<li><a href=""><img src="assets/images/gp.png" alt="Google Plus"></a></li>
+				<li><a href=""><img src="assets/images/facebook.png" alt="facebook"></a></li>
+				<li><a href=""><img src="assets/images/twitter.png" alt="twitter"></a></li>
+			</ul>
+		</div>
+	</div>
+</div>

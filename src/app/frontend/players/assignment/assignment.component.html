@@ -1,0 +1,68 @@
+<section class="container-bg">
+	<div class="container ps-relative">
+		
+			<ul class="dashboard-tabs">
+				<li><a [routerLink]="['/frontend/player/dashboard']"><i class="home-icon"></i><span>My Teams</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/statistics']" ><i class="stats-icon"></i><span>Statistics</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/assignments']" class="active"><i class="assign-icon active"></i><span>Assignments</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/feedback']" ><i class="feed-icon"></i><span>Feedback</span></a></li>
+				<li><a  [routerLink]="['/frontend/player/messages']" ><i class="msg-icon"></i><span>My Messages</span></a></li>
+				<li><a href="javascript:void(0)"><i class="book-icon"></i><span>Education Module</span></a></li>
+			</ul>
+			<div class="dashboard-container	">
+			<div class="breadcrumbs"><a href="javascript:void(0)" (click)="divToDisplay=0">Assignments</a> / Assign</div>
+			
+			<div class="dashboard-block dashboard-block-top">
+				<div *ngIf="divToDisplay==0">
+					<div class="dashboard-block dashboard-col">
+						<div class="dashboard-head">
+							<h2 class="h2-dash">Assigned Modules</h2>							
+							<!-- <button class="btn-grey btn-desktop"></button> -->
+						</div>
+						<!--  -->
+						<div class="dashboard-stats-block stats-border" *ngIf="module_with_scenes.length">
+							<div class="stats-question-block">
+								<div class="question-block assi-wrap  assignment_wrap" *ngFor="let module_with_scene of module_with_scenes">									
+									<div class="question-label">
+										<span class="q-head">{{module_with_scene.name}}</span>
+										<span (click)="startQuiz(module_with_scene.id)" class="btn-blue-start" *ngIf="module_with_scene.is_complete==0">Start</span>
+										<span class="btn-blue-start" *ngIf="module_with_scene.is_complete==1">Completed</span>
+										<!--<span (click)="restartQuiz(module_with_scene.id)" class="btn-blue-start" *ngIf="module_with_scene.is_complete==1">Re-take</span>-->
+									</div>
+									<div class="question-rows-block" style="display: block;">
+										<div class="assi-col">										
+											<div class="assi-box assignmnt_box" *ngFor="let scene of module_with_scene.scenes; let i = index">												
+												<p>{{scene.scene_name}}</p>										
+												<figure>
+							                        <a data-lightbox="lightbox"  href="{{image_source}}/{{scene.container}}/download/{{scene.admin_media_url}}"  data-title=""><img src="{{image_source}}/{{scene.container}}/download/{{scene.admin_media_url}}" /></a>						                       
+							                    </figure>		
+												<span class="status-button-complete" *ngIf="scene.is_complete==2">Completed</span>
+												<span class="status-button-pending" *ngIf="scene.is_complete==0">Pending</span>
+												<span class="status-button-in-progress" *ngIf="scene.is_complete==1">In Progress</span>
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+						</div>			
+
+						<div class="stats-question-block" *ngIf="!module_with_scenes.length">
+							<h2 class="dashboard-head">No module has been assigned to you yet.</h2>
+						</div>
+
+					</div>
+				</div> <!-- *ngIf="divToDisplay==0" END HERE -->
+				<div *ngIf="divToDisplay==1">
+					<iframe scrolling="no" src="/assets/game_contents/module.html" width="100%" height="1100px" frameBorder="0"></iframe>
+				</div>
+			</div>
+
+
+		</div>
+
+		<app-right-ads></app-right-ads>
+		<!--<div class="ads-container">-->
+			<!--<img src="assets/images/placeholder.png" class="ad-class" />-->
+		<!--</div>-->
+	</div>	
+</section>

@@ -1,0 +1,176 @@
+<header>
+	<div class="header-section" *ngIf="isUserLoggedIn==0">
+		<div class="container flex-block">
+			<div class="logo-class"><a href="#"><img src="assets/images/logo.png" alt="logo"></a></div>
+			<div id="slide">
+				<span></span>
+			</div>
+			<div id="menu">
+			<div class="cf">
+				<span id="closeNav"></span>
+			</div>
+				<ul class="header-nav">
+					<li><a  [routerLink]="['/home']" >Home</a></li>
+					<li class="moreNav">
+						<a href="#">Team Sports</a> <span></span>
+						<ul>
+							<li><a href="">Sport 1</a></li>
+							<li><a href="">Sport 2</a></li>
+							<li><a href="">Sport 3</a></li>
+							<li><a href="">Sport 4</a></li>
+						</ul>
+					</li>
+					<li><a  [routerLink]="['/brain-power']" >Brain Power</a></li>
+					<li><a   [routerLink]="['/pricing']" >Plans &amp; Pricing</a></li>
+					<li><a  [routerLink]="['/about']" >About</a></li>
+					<li><a  [routerLink]="['/support']" >Support</a></li>
+				</ul>
+				<div class="flex-block btn-flex">
+					<a href="javascript:void(0)" class="login-btn-link flex-center" data-modal="modal0">Login</a>
+					<a [routerLink]="['/register']" class="reg-btn-link flex-center diagonal-btn">Register</a>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="header-section" *ngIf="isUserLoggedIn==1">
+		<div class="container flex-block">
+			<div class="logo-class"><a href="#"><img src="assets/images/logo.png" alt="logo"></a></div>
+			<div id="slide">
+				<span></span>
+			</div>
+			<div id="menu">
+			<div class="cf">
+				<span id="closeNav"></span>
+			</div>
+				<!-- <ul class="header-nav">
+					<li><a  [routerLink]="['/home']" >Home</a></li>
+					<li class="moreNav">
+						<a href="#">Team Sports</a> <span></span>
+						<ul>
+							<li><a href="">Sport 1</a></li>
+							<li><a href="">Sport 2</a></li>
+							<li><a href="">Sport 3</a></li>
+							<li><a href="">Sport 4</a></li>
+						</ul>
+					</li>
+					<li><a  [routerLink]="['/brain-power']" >Brain Power2</a></li>
+					<li><a   [routerLink]="['/pricing']" >Plans &amp; Pricing</a></li>
+					<li><a  [routerLink]="['/about']" >About</a></li>
+					<li><a  [routerLink]="['/support']" >Support</a></li>
+				</ul> -->
+				<div class="flex-block userLog-col">
+					<h2>Welcome</h2>
+					<img src="{{logo}}" *ngIf="logo" alt="">
+					<img src="assets/images/default.png"  *ngIf="!logo" alt="">
+					<h5>{{username}}<span></span></h5>
+					<ul class="userNav"  *ngIf="user_role==2">
+						<li><a [routerLink]="['frontend/coach/dashboard']">Dashboard</a></li>		
+						<li><a [routerLink]="['frontend/coach/profile']">Edit my profile</a></li>
+						<li><a [routerLink]="['frontend/coach/invite']">Invite Users</a></li>
+						<li><a href="">Subscription</a></li>
+						<li><a href="">change password</a></li>
+						<li><a  (click)="logoutUser()" href="javascript:void(0)">logout</a></li>
+					</ul>
+					<ul class="userNav"  *ngIf="user_role==3">
+						<li><a [routerLink]="['frontend/player/dashboard']"  *ngIf="user_role==3">Dashboard</a></li>
+						<li><a [routerLink]="['frontend/player/profile']">Edit my profile</a></li>
+						<li><a href="">Subscription</a></li>
+						<li><a href="">change password</a></li>
+						<li><a  (click)="logoutUser()" href="javascript:void(0)">logout</a></li>
+					</ul>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+	<div class="header-bottom"></div>
+</header>
+
+<!-- header -->
+
+<!-- login popup -->
+
+	<div class="modal-wrap" *ngIf="isUserLoggedIn==0"></div>
+	<div class="login-box modal-box popup" id="modal0" *ngIf="isUserLoggedIn==0">
+		<div class="loginHead cf" *ngIf="isForgot==0">
+			<div class="col-3">
+				<img src="assets/images/logo_small.png" alt="Logo">
+			</div>
+			<div class="col-3 hide640">
+				<h1>LOGIN</h1>
+			</div>
+			<div class="col-3">
+				<img src="assets/images/close.png" alt="close" class="close closepopup fr">
+			</div>
+		</div>
+		<form (ngSubmit)="login()"  #form="ngForm"  autocomplete="off" *ngIf="isForgot==0">
+			<div class="loginFrm modalList">
+				<div class="field-col">
+					<label>User Name</label>
+					<input type="email" class="frm-control" placeholder="Enter Email ID"  [(ngModel)]="user.email"  pattern=".+@.+..+" required="" name="email">
+				</div>
+
+				<div class="field-col">
+					<label>Password</label>
+					<input type="Password" class="frm-control" placeholder="Enter Password"  [(ngModel)]="user.password" required="" name="password">
+				</div>
+
+				<div class="field-col cf">
+					<div class="col-2">
+						<div class="checkbox">
+							<label>
+								<input name="o1" value="" name="remember" [(ngModel)]="remember" (change)="rememberMe(remember)" type="checkbox" *ngIf="remember==0">
+								<input name="o1" value="" name="remember" [(ngModel)]="remember" (change)="rememberMe(remember)" type="checkbox" *ngIf="remember==1" checked="">
+								<span class="cr"><i class="cr-icon round-active"></i></span>
+								<span class="remText">Remember Me</span>
+							</label>
+		                </div>
+					</div>
+					<div class="col-2">
+						<a href="javascript:void(0)" (click)="forgotPassword()">Forgot Password ?</a>
+					</div>
+				</div>
+
+				<div class="login-user-text">
+				By signing in, you agree to our Terms of Service and Privacy Policy.</div>
+
+				<div class="block-col">
+					<button [disabled]="!form.valid" class="blueFull-btn" type="submit" id="login">ENTER</button>	
+				</div>
+
+				<div class="login-bottom-block">
+					Don't have a User Name &amp; Password?  Register <a [routerLink]="['/register']" class="closepopup">Here.</a>
+				</div>
+
+			</div>
+		</form>
+		
+
+		<!-- Forgot Password For -->
+		<div class="loginHead cf" *ngIf="isForgot==1">
+			<div class="col-3">
+				<img src="assets/images/logo_small.png" alt="Logo">
+			</div>
+			<div class="col-3 hide640">
+				<h1 style="text-align: center;">FORGOT PASSWORD</h1>
+			</div>
+			<div class="col-3">
+				<img src="assets/images/close.png" alt="close" class="close fr" (click)="cancelForgotPassword()">
+			</div>
+		</div>
+		<form (ngSubmit)="resetPasswordEmail()"  #form="ngForm"  autocomplete="off" *ngIf="isForgot==1">
+			<div class="loginFrm" style="padding-top:130px;">				
+				<div class="field-col">
+					<label>Email ID</label>
+					<input type="email" class="frm-control" placeholder="Enter Email ID"  [(ngModel)]="forgot_email"  pattern=".+@.+..+" required="" name="email">
+				</div>				
+
+				<div class="block-col">
+					<button [disabled]="!form.valid" class="blueFull-btn" type="submit" id="login">SUBMIT</button>	
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- /login popup -->

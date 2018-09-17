@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Team Sport IQ</title>
+	<link rel="stylesheet" type="text/css" href="htmlsrc/fonts/font.css" />
+	<link href="htmlsrc/css/style(back up).css" rel="stylesheet" type="text/css">
+	<link href='htmlsrc/css/responsive.css' type="text/css" rel='stylesheet' />
+	<link rel="stylesheet" href="htmlsrc/css/owl.carousel.min.css">
+
+</head>
+<body class="drkBg">
+	<!-- header -->
+	<!-- <header>
+		<div class="header-section">
+			<div class="container flex-block">
+				<div class="logo-class"><a href="#"><img src="htmlsrc/images/logo.png" alt="logo"></a></div>
+				<div class="exit-col">
+					<img src="htmlsrc/images/exit.png">
+					<h3 id = "pauseplayBtn" onclick="pauseplayBtn();">PAUSE</h3>
+				</div>
+			</div>
+		</div>
+		<div class="header-bottom"></div>
+	</header> -->
+	<!-- Module  heading /timer /question number-->
+	<div class="container bg-w">
+		<div class="gary-col" id="ads_container"></div>
+		<div class="register-col">
+			<div class="container-850">
+				<ul class="scoreCard">
+					<li>
+						<img src="htmlsrc/images/sports-iq.png" >
+						<em id ="sceneName" >Scene Name Test </em>
+					</li>
+					<li>
+						time <span id="timer"></span>
+					</li>
+					<li>
+						Question <span id ="questionCounter"></span>
+						<!--Question <span>9/100</span>-->
+					</li>
+				</ul>
+				<!--<div class="canvas-col">-->
+					<!--<h2 onClick="openPopup('modal1');">How to Play</h2>-->
+					<!--<h2 onClick="openPopup('modal2');">ROLES & RESPONSIBILITY</h2>-->
+				<canvas id="canvas" width="850" height="460"></canvas>
+				<!--</div>-->
+
+			</div>
+		</div>
+
+		 <!--<PLayer Count And QUESTION ANSWER-->
+		<div class="bottom-nav-panal" >
+			<ul>
+				<li  id="p1" ><a  id="t1"  onClick="openPopup('modal2','0' );" data-tooltip="I am so glad you decided to hover!"></a></li>
+				<li  id="p2"><a  id="t2"  onClick="openPopup('modal2','1');" data-tooltip="This is just a hover tooltip"></a></li>
+				<li  id="p3"><a  id="t3"  onClick="openPopup('modal2','2');" data-tooltip="This is just a hovip"></a></li>
+				<li  id="p4"><a  id="t4"  onClick="openPopup('modal2','3');"></a></li>
+				<li  id="p5"><a  id="t5"  onClick="openPopup('modal2','4');"></a></li>
+				<li  id="p6"><a  id="t6"  onClick="openPopup('modal2','5');"></a></li>
+				<li  id="p7"><a  id="t7"  onClick="openPopup('modal2','6');"></a></li>
+				<li  id="p8"><a  id="t8"  onClick="openPopup('modal2','7');"></a></li>
+				<li  id="p9"><a  id="t9"  onClick="openPopup('modal2','8');"></a></li>
+				<li  id="p10"><a id="t10" onClick="openPopup('modal2','9');"></a></li>
+				<li  id="p11"><a id="t11" onClick="openPopup('modal2','10');"></a></li>
+
+			</ul>
+			<button type="button" class="moduleBtn" onclick="whenCurrentEducationScenemarkDone( globals.lastEducationSceneId);ig.game.sceneChanger(); " >Click here to start the module</button>
+		</div>
+
+		<div class="bottom-nav-panal colom-3" id ="questionAnswers" style="display: none">
+			<h4 id = "question">Lorem ipsum dolor sit amet, consectetur ant ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ?</h4>
+			<ul>
+				<li><a id = "ans1" onclick="clickOnAnswer(globals.dataFromAPI[0].scenes[ig.game.sceneCounter-1].questions[ig.game.currentQuestionNumber-1].answers[0].id)">Three Times</a></li>
+				<li><a id = "ans2" onclick="clickOnAnswer(globals.dataFromAPI[0].scenes[ig.game.sceneCounter-1].questions[ig.game.currentQuestionNumber-1].answers[1].id)">Five Times</a></li>
+				<li><a id = "ans3" onclick="clickOnAnswer(globals.dataFromAPI[0].scenes[ig.game.sceneCounter-1].questions[ig.game.currentQuestionNumber-1].answers[2].id)">Six Times</a></li>
+				<li><a id = "ans4" onclick="clickOnAnswer(globals.dataFromAPI[0].scenes[ig.game.sceneCounter-1].questions[ig.game.currentQuestionNumber-1].answers[3].id)">Saven Times</a></li>
+				<li><a id = "ans5" onclick="clickOnAnswer(globals.dataFromAPI[0].scenes[ig.game.sceneCounter-1].questions[ig.game.currentQuestionNumber-1].answers[4].id)">All of above</a></li>
+				<li><a id = "ans6" onclick="clickOnAnswer(globals.dataFromAPI[0].scenes[ig.game.sceneCounter-1].questions[ig.game.currentQuestionNumber-1].answers[5].id)">None of above</a></li>
+
+			</ul>
+		</div>
+	</div>
+	<!-- /Module -->
+
+	<!-- How to play modal -->
+	<div class="modal-wrap"></div>
+	<div class="login-box popup" id="modal1">
+		<div class="loginHead cf">
+			<h1 class="text-center" id = "instructionHeading">HOW TO PLAY ?</h1>
+		</div>
+		<div class="modalList">
+			<ul id = "howToPlay">
+				<!--<li><span>Lorem ipsum dolor sit amet, consectetur ant ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipspor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed dnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+
+				<!--<li><span>Lorem ipsum dolor sit amet, consectetur ant ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipspor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed dnim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+
+			</ul>
+			<div class="block-col">
+				<button type="submit" class="blueFull-btn" onclick="understood('model1');">I UNDERSTOOD</button>
+			</div>
+		</div>
+	</div>
+	<!-- /How to play modal -->
+
+	<!-- ROLES & RESPONSIBILITY -->
+	<div class="login-box popup" id="modal2">
+		<div class="loginHead cf">
+			<h1 class="text-center" id="rsPlayerName">ROLES & RESPONSIBILITY</h1>
+			<img src="htmlsrc/images/close.png" alt="close" class="close fr pos" onclick="closePopup();">
+		</div>
+		<div class="modalList scrollList" id ="rs">
+			<!-- <h3 id="rsPlayerName" ></h3> -->
+			<h4 id = "roleNameAttacking"></h4>
+
+			<ul id = "rs1">
+				<!--<li></li>-->
+				<!--<li><span>Lorem ipspor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span> </span></li>-->
+				<!--<li><span> </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>	<li><span>Lorem ipsum dolor sit amet, consectetur ant ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipspor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>	<li><span>Lorem ipsum dolor sit amet, consectetur ant ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipspor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>	<li><span>Lorem ipsum dolor sit amet, consectetur ant ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipspor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+				<!--<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>-->
+			</ul>
+			<h4 id="roleNameDefending"></h4>
+			<ul id = "rs2">
+				<!--&lt;!&ndash;<li><span>Lorem ipsum dolor sit amet, consectetur ant ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>&ndash;&gt;-->
+				<!--&lt;!&ndash;<li><span>Lorem ipspor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>&ndash;&gt;-->
+				<!--&lt;!&ndash;<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>&ndash;&gt;-->
+				<!--&lt;!&ndash;<li><span>Lorem ipsum dolor sit amet, consectetur ant ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>&ndash;&gt;-->
+				<!--&lt;!&ndash;<li><span>Lorem ipspor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>&ndash;&gt;-->
+				<!--&lt;!&ndash;<li><span>Lorem ipsum dolor sitpor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea </span></li>&ndash;&gt;-->
+			</ul>
+		</div>
+	</div>
+	<!-- /ROLES & RESPONSIBILITY -->
+
+	<!--Answer Okay-->
+	<div class="login-box popup h200" id="modal3">
+		<div class="questStatus">
+			<h2>Congratulation !</h2>
+			<h3>Your Answer is CORRECT</h3>
+		</div>
+	</div>
+	<!--/Answer Okay-->
+
+	<!--Answer Wrong-->
+	<div class="login-box popup h200" id="modal4">
+		<div class="questStatus">
+			<h2 class="redtxt">Opps !</h2>
+			<h3>Your Answer is WRONG</h3>
+		</div>
+	</div>
+	<!--/Answer Wrong-->
+
+   <!--Legends pop up-->
+	<div class="login-box popup " id="modal5">
+		<img id="legendImg"  src="media/small.png" >
+	</div>
+
+
+	<!--<!time up for corrent question>-->
+
+	<div class="login-box popup h200" id="modal6">
+		<br>
+		<br>
+		<h1 class="text-center" style="color: #4CAF50  " >  YOU FINISHED WITH MODULE  </h1>
+		<div class="block-col">
+			<button type="submit" class="blueFull-btn" onclick="LastBtnOfModule('model6');">Close module</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+		/*var isInIframe = (window.location != window.parent.location) ? true : false;
+		var api_user_id='';
+		var api_module_id='';
+		//console.log(window.parent.location.href);
+		if(!isInIframe)
+			{
+				var element = document.getElementsByTagName("div");
+				for (var i = 0; i<element.length;i++) {
+				    element[i].remove();
+				}
+				document.getElementById('body').style.display='none';
+				window.location.href="http://"+window.location.host;
+			}
+		else
+			{
+				api_user_id=localStorage.getItem('user_id');
+				api_module_id=localStorage.getItem('assign_module_id');
+			}*/
+		var api_user_id='';
+		var api_module_id='';
+		var retake=0;
+		api_user_id=localStorage.getItem('user_id');
+		api_module_id=localStorage.getItem('assign_module_id');
+		retake=localStorage.getItem('retake');
+	</script>
+    <script src="htmlsrc/js/jquery.min.js"></script>
+	<script src="htmlsrc/js/owl.carousel.js"></script>
+	<script src="htmlsrc/js/script.js"></script>
+    <script type="text/javascript" src="src/js/globals.js"></script>
+
+</body>
+
+  <script>
+
+      for(var k= 1; k<= 11; k++)
+      {
+          $(' #t'+k).text("Player Number "+k);
+      }
+//
+//      $.getJSON("sample_test.json",
+//		  function (data)
+//		  {
+//			 globals.dataFromAPI= data;
+//		     console.log(globals.dataFromAPI);
+//		     globals.testAry = globals.dataFromAPI[0].scenes;
+//		     globals.testAry2 = globals.dataFromAPI[0].scenes;
+//		     console.log("real scene array");
+//		     console.log(globals.dataFromAPI[0].scenes);
+//
+//              for(var i= 0; i< globals.dataFromAPI[0].scenes.length;i++)
+//				  {
+//					  globals.scenes.push(globals.dataFromAPI[0].scenes[i].media);
+//                      console.log("in loading");
+//				  }
+//				  console.log("last of load");
+//		  },
+//
+//		  function (success) {
+//              console.log("   after --- call back-----end loading"+success);
+//          }
+//      );
+
+      /*$.ajax({
+          url: "sample_test.json",
+		  async:false,
+		  type:'GET',
+          success: function (data,textStatus,xhr) {
+              //console.log(data);
+              console.log("real testAry");
+              globals.dataFromAPI= data;
+              console.log(globals.dataFromAPI);
+              globals.testAry = globals.dataFromAPI[0].scenes;
+              globals.testAry2 =  globals.testAry.slice();
+          }
+      });
+
+      for ( var i =  0; i< globals.testAry2.length;i++)
+      {
+          if( globals.testAry2[i].status === 2)
+			  {
+				  globals.testAry2.splice(i,1);
+				  i--;
+			  }
+      }
+
+      var test = [{"scenes":globals.testAry2}];
+      globals.dataFromAPI = test;
+      for(var i= 0; i< globals.dataFromAPI[0].scenes.length;i++)
+      {
+          globals.scenes.push(globals.dataFromAPI[0].scenes[i].media);
+      }
+      console.log("filter array");
+      console.log(globals.dataFromAPI);*/
+
+    $.ajax({
+      async:false,
+        url: 'http://18.220.70.32:3000/api/modules/getModulesDetailsAPI/?data={%22age_group_id%22:50,%22module_id%22:'+api_module_id+',%22no_of_questions%22:10,%22player_id%22:'+api_user_id+',%22retake%22:'+retake+'}',
+        type: 'GET',
+        success: function (data, textStatus, xhr)
+		   {
+		    globals.dataFromAPI = data;
+		    console.log("real array ");
+		    console.log( globals.dataFromAPI);
+		    for(var i= 0; i< globals.dataFromAPI[0].scenes.length;i++)
+		    {
+		     if(globals.dataFromAPI[0].scenes[i].legends)
+		      {
+		       globals.LegendsSceneImage.push(globals.dataFromAPI[0].scenes[i].legends);
+		      }
+		    }
+		              globals.testAry = globals.dataFromAPI[0].scenes;
+		              globals.testAry2 =  globals.testAry.slice();
+		   },
+        error: function (xhr, textStatus, errorThrown) {
+        }
+    });
+
+      for ( var i =  0; i< globals.testAry2.length;i++)
+        {
+            if( globals.testAry2[i].status === 2)
+	           {
+	            globals.testAry2.splice(i,1);
+	            i--;
+	           }
+        }
+        var test = [{"scenes":globals.testAry2}];
+        globals.dataFromAPI = test.slice();
+        for(var i= 0; i< globals.dataFromAPI[0].scenes.length;i++)
+        {
+            globals.scenes.push(globals.dataFromAPI[0].scenes[i].media);
+        }
+       console.log("after Filtyer array");
+       console.log(globals.dataFromAPI);
+
+
+       // Get Ads 
+
+       $.ajax({
+          url: "http://18.220.70.32:3000/api/advertisements/?filter="+JSON.stringify({"where":{"location":0,"is_active":1}}),
+		  type:'GET',
+          success: function (data) {
+            	if(data.length>0)
+            		{
+            			var index=Math.floor(Math.random() * data.length) + 0 ;
+            			$("#ads_container").append('<a href="'+data[index].link+'" target="_blank"><img src="http://18.220.70.32:3000/api/containers/advertisements/download/'+data[index].image+'" width="850px" height="90px" />');
+            		}
+          },
+          error:function(error)
+          	{
+          		console.log(error);
+          	}
+      });
+
+
+//var array =[{s:1},{s:2},{S:1},{s:1}];
+//var array2 = array.slice();
+//console.log(array);
+//array2.splice(1,1);
+//console.log(array2);
+
+//	$.ajax({
+//		async:false,
+//		url: 'http://18.220.70.32:3100/api/modules/getModulesOfAgeGroup?age_group_id=50',
+//		type: 'GET',
+//		success: function (data, textStatus, xhr) {
+//			globals.dataFromAPI = data;
+//			//console.log(data);
+//		},
+//		error: function (xhr, textStatus, errorThrown) {
+//		}
+//	});
+
+//    $.ajax({
+//     	async:false,
+//        url: globals.apiEndPoints+'modules/getModulesDetailsAPI/?data={%22age_group_id%22:50,%22module_id%22:20,%22no_of_questions%22:10,%22player_id%22:96}',
+//        type: 'GET',
+//        success: function (data, textStatus, xhr)
+//			{
+//				globals.dataFromAPI = data;
+//				console.log( globals.dataFromAPI);
+//				for(var i= 0; i< globals.dataFromAPI[0].scenes.length;i++)
+//				{
+//					globals.scenes.push(globals.dataFromAPI[0].scenes[i].media);
+//					if(globals.dataFromAPI[0].scenes[i].legends)
+//						{
+//							globals.LegendsSceneImage.push(globals.dataFromAPI[0].scenes[i].legends);
+//						}
+//				}
+//			},
+//        error: function (xhr, textStatus, errorThrown) {
+//        }
+//    });
+
+  </script>
+  <script type="text/javascript" src="lib/impact/impact.js"></script>
+  <script type="text/javascript" src="lib/game/main.js"></script>
+  <script type="text/javascript" src="src/js/sceneChanger.js"></script>
+  <script type="text/javascript" src="src/js/answerClick.js"></script>
+
+</html>
+
+

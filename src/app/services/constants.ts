@@ -1,0 +1,13 @@
+var domain='http://18.220.70.32';
+export const API_ENDPOINT= domain+':3000/api/';
+export const ASSETS_URL= domain+'/';
+export const COACH_REGISTRATION_PRICE=10;
+export const GAME_CONTENT_URL=domain+'/assets/game_contents/module.html';
+export const STATUS_CODE_422='';
+export const STATUS_CODE_400='';
+export const STATUS_CODE_401='';
+export const STATUS_CODE_402='';
+export const STATUS_CODE_500='';
+export const STATUS_CODE_200='';
+export const STATUS_CODE_201='';
+export const STATUS_CODE_502='';

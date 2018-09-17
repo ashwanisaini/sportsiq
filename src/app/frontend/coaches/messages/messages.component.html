@@ -1,0 +1,110 @@
+<section class="container-bg">
+	<div class="container ps-relative">
+		
+			<ul class="dashboard-tabs">
+				<li><a [routerLink]="['/frontend/coach/dashboard']"><i class="home-icon"></i><span>My Teams</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/roster']" ><i class="roster-icon"></i><span>Roster</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/statistics']" ><i class="stats-icon"></i><span>Statistics</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/assignments']" ><i class="assign-icon"></i><span>Assignments</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/feedback']"><i class="feed-icon"></i><span>Feedback</span></a></li>
+				<li><a  [routerLink]="['/frontend/coach/messages']"  class="active"><i class="msg-icon active"></i><span>My Messages</span></a></li>
+			</ul>
+			<div class="dashboard-container	">
+			<div class="dashboard-block roaster">
+				<div class="dashboard-head">
+					<h2 class="h2-dash">Messages</h2>
+					<div class="dropdown-button">
+						<div class="wrapper-dropdown-2" id="drop1" tabindex="1">{{team_drop_down_text}}
+							<ul class="dropdown">
+								<li *ngFor="let team of teams">
+									<a href="javascript:void(0);" (click)="selectTeam(team.id,team.team_name)">{{team.team_name}}</a>
+								</li>								
+							</ul>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="dashboard-stats-block stats-border">
+					<ul class="stat-tabs">
+						<li (click)="sectionToDisplayFunction(0)">
+							<a href="javascript:void(0);" class="active" *ngIf="show_message_form==0" ><span>Previous Messages</span>
+							</a>
+							<a href="javascript:void(0);" *ngIf="show_message_form!=0" ><span>Previous Messages</span>
+							</a>
+						</li>
+						<li (click)="sectionToDisplayFunction(1)">
+							<a href="javascript:void(0);" class="active"  *ngIf="show_message_form==1"><span>New Message</span>
+							</a>
+							<a href="javascript:void(0);" *ngIf="show_message_form!=1"><span>New Message</span>
+							</a>
+						</li>												
+					</ul>
+					<div class="stats-question-block" *ngIf="show_message_form==0">
+						<table class="table-dash table-message" cellpadding="0" cellspacing="0" *ngIf="messages.length>0">
+							<thead>
+								<tr>
+									<th>Date (dd-mm-yyyy)</th>
+									<th>Time (hh:ss)</th>
+									<th>Message</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let message of messages">
+									<td>
+										<span>
+											{{message.date}}
+										</span>
+									</td>
+									<td>
+										<span>
+											{{message.time}}
+										</span>
+									</td>
+									<td>
+										<span class="txt-black-mm">
+											<a href="javascript:void(0)" class="feedback-link" *ngIf="!message.show" (click)="showIndividualMessage(message,1)">+ VIEW MESSAGE</a>
+											<a href="javascript:void(0)" class="feedback-link" *ngIf="message.show" (click)="showIndividualMessage(message,0)">- VIEW MESSAGE</a>
+											<span class="feedback-text" *ngIf="message.show">
+												{{message.message}}<br>
+												<a data-lightbox="lightbox"  *ngIf="message.image" href="{{image_path}}{{message.image}}"  data-title=""><img src="{{image_path}}{{message.image}}" width="100" /></a>
+											</span>
+										</span>
+									</td>
+								</tr>						
+							</tbody>
+						</table>
+						<table class="table-dash table-message" cellpadding="0" cellspacing="0" *ngIf="messages.length==0 && team_id">
+							<thead>
+								<tr>
+									<h3>You did not send any message to the selected team so far.</h3>
+								</tr>
+							</thead>							
+						</table>
+						<table class="table-dash table-message" cellpadding="0" cellspacing="0" *ngIf="!team_id">
+							<thead>
+								<tr>
+									<h3>Please select the team from drop down to view the messages.</h3>
+								</tr>
+							</thead>							
+						</table>
+					</div>
+					<div class="stats-question-block" *ngIf="show_message_form==1">
+						<textarea class="textarea-dashboard" [(ngModel)]="message_text" placeholder="Enter your message here"></textarea>
+						<div ng2FileDrop  [uploader]="message_pic_uploader" (click)="refreshFileList()"></div>
+						<div class="upload-block fileUploadbtn">
+		          			<label>
+		          				<button type="button" class="btn">Upload File</button>
+		          				<input type="file"  (change)="readMessagePicUrl($event)" ng2FileSelect [uploader]="message_pic_uploader"  [(ngModel)]="message_pic" accept="image/*"  name="message_pic" class="fl-btn2"/>
+		          			</label>
+		          		</div>
+		          		<br>  
+						<button class="btn-blue" (click)="fileUploadMessagePic()">Send</button>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<app-right-ads></app-right-ads>
+	</div>
+</section>
